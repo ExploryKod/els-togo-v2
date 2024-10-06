@@ -2,3 +2,260 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    :root {
+      --content-min-h: calc(100vh - 96px);
+      --primary: #333366;
+      --primary-foreground: 210 40% 98%;
+      --secondary: rgb(9, 127, 165);
+      --foreground: 222.2 47.4% 11.2%;
+      --background: #ededed;
+      --background-secondary: #c8dde3;
+      --secondary-foreground: 222.2 47.4% 11.2%;
+      --button: #097ea5;
+      --button-light: hsl(195, 90%, 54%);
+      --button-xlight: hsl(195, 90%, 44%);
+      --button-text: #fff;
+      --text-secondary: #3c3c3c;
+      --dropdown: #e0f4ff;
+      --dropdown-hover: #b3e5ff;
+      --button-secondary: #e7e7e7;
+      --selected: #9ec6ff;
+      --logo-shadow: #053949;
+      --logo-body: #00d8fe;
+      --span-bg: linear-gradient(to right, #4e4e9e, #097fa5, #3e87ed);
+  
+      --muted: 210 40% 96.1%;
+      --muted-foreground: 215.4 16.3% 46.9%;
+   
+      --popover: 0 0% 100%;
+      --popover-foreground: 222.2 47.4% 11.2%;
+   
+      --border: 214.3 31.8% 91.4%;
+      --input: 214.3 31.8% 91.4%;
+   
+      --card: 0 0% 100%;
+      --card-foreground: 222.2 47.4% 11.2%;
+   
+      --accent: 210 40% 96.1%;
+      --accent-foreground: 222.2 47.4% 11.2%;
+   
+      --destructive: 0 100% 50%;
+      --destructive-foreground: 210 40% 98%;
+   
+      --ring: 215 20.2% 65.1%;
+   
+      --radius: 0.5rem;
+    }
+  }
+  
+  @layer base {
+    *:lang(ar) {
+      font-family: var(--rubik) !important;
+    }
+    *:lang(fa) {
+      font-family: var(--rubik) !important;
+    }
+  }
+  
+  @layer components {
+  
+    /* === BUTTONS === */
+  
+    .button-primary {
+      @apply bg-button text-button-text hover:opacity-75;
+    }
+  
+    .button-secondary {
+      @apply bg-button-secondary text-secondary ring-secondary ring-1
+    }
+  
+    .button-light {
+      @apply bg-button-secondary text-primary hover:opacity-75
+    }
+    
+    .button-light-swipe {
+      @apply bg-button-secondary text-primary btn-swipe
+    }
+  }
+  
+  @layer utilities {
+  
+    .btn-swipe {
+      @apply relative overflow-hidden transition-all before:absolute before:bottom-0 before:left-0 before:top-0 before:z-0 before:h-full 
+             before:w-0 before:bg-background-secondary before:transition-all before:duration-500 hover:text-white hover:before:left-0 
+             hover:before:w-full hover:before:bg-button
+    }
+  
+    .btn-swipe > * {
+      @apply relative z-10
+    }
+  
+  
+     /* === transversal utilities === */
+  
+    .linear-anim-link {
+      @apply relative after:right-[50%] before:-bottom-2 after:-bottom-2 before:left-[50%] before:absolute after:absolute before:w-0 hover:before:w-[50%] after:w-0 hover:after:w-[50%] before:h-[2px] after:h-[2px] before:origin-center after:origin-center transition-all before:transition-[width] after:transition-[width] before:duration-700 ease-in-out before:ease-in-out after:ease-in-out after:duration-700
+    } 
+  
+    .linear-color-primary {
+      @apply before:bg-primary after:bg-primary hover:text-primary 
+    }
+  
+    .linear-color-light {
+      @apply before:bg-white after:bg-white hover:text-white 
+    }
+  
+    /* z-index */
+    
+    .z-max {
+      @apply z-40
+    }
+  
+    .z-sub-header {
+      @apply z-30
+    }
+  
+    .z-lg {
+      @apply z-20
+    }
+  
+    .z-md {
+      @apply z-10
+    }
+  
+    .z-sm {
+      @apply z-5
+    }
+  
+    .z-floor {
+      @apply z-0
+    }
+  
+    .-z-sm {
+      @apply -z-10
+    }
+  
+    .-z-md {
+      @apply -z-20
+    }
+  
+    .card-shadow {
+       @apply bg-white shadow-[hsl(195,90%,34%)_7.4px_7.4px_0px] p-[25px] border-[hsl(195,90%,34%)] border border-solid rounded-lg 
+    }
+  
+    /* Image Corners : use it with next/image Image component to reach the img tag */
+    .img-rounded-lg img {
+      @apply rounded-lg
+    }
+  
+    .img-rounded-t-lg img {
+      @apply rounded-t-lg
+    }
+  
+    .img-rounded-b-lg img {
+      @apply rounded-b-lg
+    }
+  
+    .img-rounded-l-lg img {
+      @apply rounded-l-lg
+    }
+  
+    .img-rounded-r-lg img {
+      @apply rounded-r-lg
+    }
+  
+    .img-full img {
+      @apply w-full h-auto
+    }
+    
+    .img-full-h img {
+      @apply w-auto h-full
+    }
+  
+    .img-full-w-h {
+      @apply w-full h-full 
+    }
+  
+    /* === Header utilities === */
+    .hamburger-toggle {
+      @apply [&>div]:h-0 [&>div]:bg-white [&>div]:before:translate-y-0 [&>div]:before:rotate-45 [&>div]:after:translate-y-0 [&>div]:after:-rotate-45;
+    }
+  }
+  
+  body {
+    overflow-x: hidden;
+  }
+  
+  .uneffect img {
+    opacity: 1;
+  }
+  
+  .hovered-skill img {
+    opacity: 1;
+    transition: all 250ms ease-in-out;
+    transform: scale(0.8) translateY(5px)
+  } 
+  
+  .no-hovered-skill img {
+    opacity: 0.3;
+  }
+  
+  /* custom css */
+  
+  .button-primary {
+    background-color: var(--button);
+    color: var(--button-text);
+    transition: opacity 0.3s ease;
+  }
+  
+  .button-primary:hover {
+    opacity: 0.75;
+  }
+  
+  
+  .img-container-avatar img {
+    max-width: 400px;
+    background-color: transparent;
+    height: 100%;
+    width: 100%;
+    border-radius: 100%;
+  }
+  
+  @media screen and (max-width: 1279px ){
+    .img-container-avatar img {
+      max-width: 250px;
+    }
+  }
+  
+  
+  .img-sm img {
+    max-width: 250px;
+  }
+  
+  .object-cover img {
+    object-fit: cover;
+    aspect-ratio: 1;
+  }
+  
+  .object-contain img {
+    object-fit: contain;
+    aspect-ratio: 1;
+  }
+  
+  /* === Fancybox css === */
+  .f-carousel {
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  .f-carousel__slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .f-carousel__slide img {
+    width: 80%;
+    height: auto;
+  }

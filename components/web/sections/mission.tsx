@@ -37,7 +37,7 @@ const Mission: React.FC<MissionProps> = ({ sections, cards }) => {
                 <h2 className="pre-title pre-title--centered pre-title--light">
                   {sectionText.pretitle || 'Notre Mission & nos valeurs'}
                 </h2>
-                <div className="my-5">{sectionText.text || ''}</div>
+                <div className="my-5 text-white">{sectionText.text || 'Découvrez nos valeurs'}</div>
               </div>
             ))}
         </div>

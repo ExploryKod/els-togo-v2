@@ -15,6 +15,13 @@ $theme-colors: ();
     @import '../../lib/bootstrap5/scss/bootstrap-reboot.scss';
     @import '../../lib/bootstrap5/scss/bootstrap-grid.scss';
     @import '../../lib/bootstrap5/scss/card';
+
+    a {
+        &:hover {
+            text-decoration: none!important;
+        }
+        
+    }
 }
 
 @import 'base/root';

@@ -11,10 +11,10 @@ export default function Error({
 }) {
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-[var(--content-min-h)] gap-4">
-      <h2 className="my-2 font-bold text-xl">Loading...</h2>
-      {error.digest && <p className="my-2 font-bold text-sm italic">{error.digest}</p>}
-      <MyButton variant={'primary'} className="" onClick={() => reset()}>Retour</MyButton>
+    <div className="flex flex-col justify-center items-center gap-4 grow">
+      <h2 className="my-2 font-bold text-xl">Une erreur est survenue...</h2>
+      {error.message && <p className="my-2 font-bold text-sm italic">{error.message}</p>}
+      <MyButton className="mt-3" variant={'primary'} onClick={() => reset()}>Retour</MyButton>
     </div>
   )
 }

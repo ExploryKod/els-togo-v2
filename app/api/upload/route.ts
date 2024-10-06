@@ -11,22 +11,23 @@ export const POST = async (req: NextRequest) => {
 
   if (file) {
     const buffer = Buffer.from(await file.arrayBuffer());
+
     if (!fs.existsSync(UPLOAD_DIR)) {
       fs.mkdirSync(UPLOAD_DIR);
     }
 
-    fs.writeFileSync(
-      path.resolve(UPLOAD_DIR, (body.file as File).name),
-      buffer
-    );
+    const fileName = (body.file as File).name;
+    const filePath = path.resolve(UPLOAD_DIR, fileName);
+
+    fs.writeFileSync(filePath, buffer);
+
+    return NextResponse.json({
+      success: true,
+      name: fileName,
+    });
   } else {
     return NextResponse.json({
       success: false,
     });
   }
-
-  return NextResponse.json({
-    success: true,
-    name: (body.file as File).name,
-  });
 };

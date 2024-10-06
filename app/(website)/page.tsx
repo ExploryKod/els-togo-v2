@@ -10,15 +10,12 @@ import type { Project } from "@/components/web/utils/elsMasonry";
 import { UploadForm } from "@/components/uploadForm/uploadForm";
 import { promises as fs } from 'fs';
 
+
 export default async function Page() {
- 
-  const Map = useMemo(() => dynamic(
-    () => import('@/components/web/utils/map'),
-    {
-        loading: () => <p>A map is loading...</p>,
-        ssr: false
-    }
-), [])
+
+const Map = dynamic(() => import('@/components/web/utils/map'), {
+  ssr: false,
+});
 
 const DATA = [
   { image: 'https://picsum.photos/seed/random101/500/500' },
@@ -26,8 +23,8 @@ const DATA = [
   { image: 'https://picsum.photos/seed/random103/500/500' },
 ]
 
-  const file = await fs.readFile(process.cwd() + '/public/project.json', 'utf8');
-  const jsonProjects = JSON.parse(file);
+  const file = await fs.readFile(process.cwd() + '/public/front-projects.json', 'utf8');
+  const projects = JSON.parse(file);
   console.log(process.cwd());
 
 
@@ -134,182 +131,22 @@ const DATA = [
     },
   ];
 
-  const placeholder = "/assets/img/projects/placeholder/placeholder-project.jpg"
-  const projects: Project[] = [
-    {
-      id: 1,
-      column: 1,
-      title: "Projet 1",
-      height: "150",
-      date: "2023-09-01",
-      place: "Lomé, Togo",
-      imgUrl: placeholder,
-      alt: "",
-      description: "Projet communautaire pour l'autonomisation locale.",
-      background: "els-horizon",
-      color: "black",
-    },
-    {
-      id: 2,
-      column: 1,
-      title: "Projet 2",
-      height: "390",
-      date: "2023-07-15",
-      place: "Kara, Togo",
-      imgUrl: placeholder,
-      alt: "",
-      description: "Initiative de reforestation.",
-      background: "els-primary",
-      color: "white",
-    },
-    {
-      id: 3,
-      column: 1,
-      title: "Projet 3",
-      height: "174",
-      date: "2023-05-22",
-      place: "Atakpamé, Togo",
-      imgUrl: placeholder,
-      alt: "",
-      description: "Projet éducatif pour les jeunes.",
-      background: "els-tertiary",
-      color: "white",
-    },
-    {
-      id: 4,
-      column: 2,
-      title: "Projet 4",
-      height: "155",
-      date: "2023-09-01",
-      place: "Lomé, Togo",
-      imgUrl: placeholder,
-      alt: "",
-      description: "Projet communautaire pour l'autonomisation locale.",
-      background: "els-primary",
-      color: "white",
-    },
-    {
-      id: 5,
-      column: 2,
-      title: "Projet 5",
-      height: "100",
-      date: "2023-07-15",
-      place: "Kara, Togo",
-      imgUrl: placeholder,
-      alt: "",
-      description: "Initiative de reforestation.",
-      background: "els-secondary",
-      color: "white",
-     
-    },
-    {
-      id: 6,
-      column: 2,
-      title: "Projet 6",
-      height: "70",
-      date: "2023-05-22",
-      place: "Atakpamé, Togo",
-      imgUrl: placeholder,
-      alt: "",
-      description: "Projet éducatif pour les jeunes.",
-      background: "els-primary",
-      color: "white",
-    },
-    {
-      id: 7,
-      column: 3,
-      title: "Projet 7",
-      height: "130",
-      date: "2023-05-22",
-      place: "Atakpamé, Togo",
-      imgUrl: placeholder,
-      alt: "",
-      description: "Projet éducatif pour les jeunes.",
-      background: "els-secondary",
-      color: "white",
-    },
-    {
-      id: 8,
-      column: 3,
-      title: "Projet 8",
-      height: "120",
-      date: "2023-05-22",
-      place: "Atakpamé, Togo",
-      imgUrl: placeholder,
-      alt: "",
-      description: "Projet éducatif pour les jeunes.",
-      background: "els-secondary",
-      color: "white",
-    },
-    {
-      id: 9,
-      column: 3,
-      title: "Projet 9",
-      height: "250",
-      date: "2023-05-22",
-      place: "Atakpamé, Togo",
-      imgUrl: placeholder,
-      alt: "",
-      description: "Projet éducatif pour les jeunes.",
-      background: "els-tertiary",
-      color: "white",
-    },
-    {
-      id: 10,
-      column: 4,
-      title: "Projet 10",
-      height: "155",
-      date: "2023-05-22",
-      place: "Atakpamé, Togo",
-      imgUrl:placeholder,
-      alt: "",
-      description: "Projet éducatif pour les jeunes.",
-      background: "els-secondary",
-      color: "white",
-    },
-    {
-      id: 11,
-      column: 4,
-      title: "Projet 11",
-      height: "250",
-      date: "2023-05-22",
-      place: "Atakpamé, Togo",
-      imgUrl:placeholder,
-      alt: "",
-      description: "Projet éducatif pour les jeunes.",
-      background: "els-primary",
-      color: "white",
-    },
-    {
-      id: 12,
-      column: 4,
-      title: "Projet 12",
-      height: "250",
-      date: "2023-05-22",
-      place: "Atakpamé, Togo",
-      imgUrl: placeholder,
-      alt: "",
-      description: "Projet éducatif pour les jeunes.",
-      background: "els-primary",
-      color: "white",
-    },
-    
-  ];
-  
-
 
   return (
     <>
     <Hero sections={sections} />
-    <UploadForm />
-    <Mission sections={sections} cards={cards} />
-    <ProjectSection sections={sections}>
-      <ElsMasonry projects={projects} />
-    </ProjectSection>
-    <Team sections={sections} members={members} />
-    <Contact contacts={contacts} sections={sections}>
-      <Map posix={[6.26, 1.25]} />
-    </Contact>
+    {cards && cards.mission.length > 0 ? (<Mission sections={sections} cards={cards} />) : null}
+    {projects && projects.length > 0 ? (
+         <ProjectSection sections={sections}>
+          <ElsMasonry projects={projects} />
+        </ProjectSection>
+    ) : null}
+    {members && members.length > 0 ? (<Team sections={sections} members={members} />) : null}
+    {contacts && contacts.length > 0 ? (
+      <Contact contacts={contacts} sections={sections}>   
+        <Map />
+        </Contact>
+    ) : null}
     </>
   );
 }

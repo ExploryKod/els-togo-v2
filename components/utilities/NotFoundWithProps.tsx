@@ -1,8 +1,6 @@
 "use client"
 import React from 'react'
-import { MyButton, SimpleLink } from '../Button'
-import { useTranslations } from 'next-intl'
-import Image from 'next/image'
+import { MyButton } from '../Button'
 
 type TextMessage = {text: string, text2: string, color?: string}
 interface NotFoundComponentProps {
@@ -11,7 +9,6 @@ interface NotFoundComponentProps {
   message: Partial<TextMessage>
   subject?: Partial<TextMessage>
   isTextColumn?: boolean
-  locale: string | undefined
   website?: string
   github?: string
   isError?: boolean
@@ -25,14 +22,10 @@ const NotFoundWithProps: React.FC<NotFoundComponentProps > = ({
   error= {text: "", color: ""},
   message ={text: "", color: ""},
   subject = {text: "", color: ""},
-  locale,
   isTextColumn = false,
   ...props
 }) => {
-  
-  const t = useTranslations('')  
-  const tp = useTranslations('projectPage')  
- 
+   
   return (
     <div className={classNames} {...props}>
       <div className={`min-w-[360px] border border-2 border-secondary rounded-lg`}>
@@ -46,17 +39,9 @@ const NotFoundWithProps: React.FC<NotFoundComponentProps > = ({
           </div>
 
           <div className="flex justify-center flex-wrap gap-4 items-center bg-background-secondary px-4 py-2 rounded-b-lg">
-          {website ? (<SimpleLink url={website} className="" rounded variant={"primary"} size='medium'>
-              <span className="before:z-lg">{t('Voir le site web')}</span>
-            </SimpleLink>):null}
-            {github ? (<SimpleLink url={github} className="group flex items-center gap-2" rounded variant={"secondary"} size='medium'>
-              <Image src='/github/github-mark.svg' className="group-hover:hidden" width={24} height={24} alt="github" />
-              <Image src='/github/github-mark-white.svg' className="hidden group-hover:block" width={24} height={24} alt="github" />
-              <span className="before:z-lg">{t('Voir le repository')}</span>
-            </SimpleLink>):null}
-            <a className="" href={`/${locale}/#projects`}>
+            <a className="" href={`/`}>
               <MyButton className="" rounded variant={"secondary"} size='medium'>
-                <span className="before:z-lg">{t('Retour')}</span>
+                <span className="before:z-lg">Retour</span>
               </MyButton>
             </a>
           </div>

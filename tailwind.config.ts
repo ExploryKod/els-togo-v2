@@ -27,16 +27,16 @@ export default {
         'span-bg': 'var(--span-bg)'
       },
       colors: {
-        primary: 'var(--els-primary)',
+        elsprimary: 'var(--els-primary)',
         'primary-darken': 'var(--els-primary-darken)',
         'primary-05': 'var(--els-primary-05)',
         'primary-08': 'var(--els-primary-08)',
 
-        secondary: 'var(--els-secondary)',
+        elssecondary: 'var(--els-secondary)',
         'secondary-darken': 'var(--els-secondary-darken)',
         'secondary-08': 'var(--els-secondary-08)',
 
-        tertiary: 'var(--els-tertiary)',
+        elstertiary: 'var(--els-tertiary)',
         'tertiary-darken': 'var(--els-tertiary-darken)',
         'tertiary-08': 'var(--els-tertiary-08)',
 
@@ -45,12 +45,33 @@ export default {
 
         white: 'var(--els-white)',
         black: 'var(--els-black)',
+        background: 'var(--background)',
+        primary: {
+          DEFAULT: 'var(--primary)'
+        },
+        'button-secondary': 'var(--button-secondary)',
+        'button-text': 'var(--button-text)',
+        'text-secondary': 'var(--text-secondary)',
+        'background-secondary': 'var(--background-secondary)',
+        secondary: {
+          DEFAULT: 'var(--secondary)', 
+          '700': 'rgba(9, 127, 165, 0.8)'
+        },
+        button: {
+          DEFAULT: 'var(--button)'
+        },
+        buttonlight: 'var(--button-light)',
+        buttonxlight: 'var(--button-xlight)',
+        selected: 'var(--selected)',
+        dropdown: 'var(--dropdown)',
+        dropdownHover: 'var(--dropdown-hover)',
+        buttonSecondary: 'var(--button-secondary)'
       },
       boxShadow: {
         'secondary-blue': '0 7.4px 0 rgba(149, 127, 165, 0.7)', 
       },
       fontFamily: {
-        sans: ['var(--font-space-grotesk)', 'var(--rubik)', "var(--font-inter)"]
+        sans: ['var(--font-space-grotesk)', 'var(--rubik)', "var(--font-inter), var(--font-montserrat)"]
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',

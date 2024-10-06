@@ -13,6 +13,8 @@
     "typegen": "sanity schema extract && sanity typegen generate"
   },
   "dependencies": {
+    "@clerk/nextjs": "^5.7.1",
+    "@maptiler/leaflet-maptilersdk": "^2.0.0",
     "@sanity/assist": "^3.0.4",
     "@sanity/icons": "^2.11.8",
     "@sanity/image-url": "^1.0.2",
@@ -35,6 +37,7 @@
     "next": "latest",
     "next-sanity": "^9.0.18",
     "postcss": "^8.4.38",
+    "rate-limiter-flexible": "^5.0.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-leaflet": "^4.2.1",
@@ -44,6 +47,7 @@
     "styled-components": "^6.1.11",
     "tailwindcss": "^3.4.3",
     "typescript": "5.4.5",
+    "uuid": "^10.0.0",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {

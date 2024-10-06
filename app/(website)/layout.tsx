@@ -104,14 +104,12 @@ export default function RootLayout({
         <meta name="theme-color" content="#ffffff" />
       </Head>
       <body>
-        <section className="min-h-screen">
           {draftMode().isEnabled && <AlertBanner />}
           <Header />
           <main>{children}</main>
           <Suspense>
             <Footer />
           </Suspense>
-        </section>
         {draftMode().isEnabled && <VisualEditing />}
         <SpeedInsights />
       </body>
