@@ -4,7 +4,7 @@ import { Children, useState, type ReactNode, useMemo } from 'react';
 import { House } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
-import BreadCrumbIcon from '@/src/icons/breacrumbIcon'
+import BreadCrumbIcon from '@/icons/breacrumbIcon'
 import { BreadCrumbsContext } from './breadcrumbContext';
 import Link from 'next/link';
 import { Spinner } from './spinner';

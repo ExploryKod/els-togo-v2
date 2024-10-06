@@ -82,9 +82,7 @@
   @layer utilities {
   
     .btn-swipe {
-      @apply relative overflow-hidden transition-all before:absolute before:bottom-0 before:left-0 before:top-0 before:z-0 before:h-full 
-             before:w-0 before:bg-background-secondary before:transition-all before:duration-500 hover:text-white hover:before:left-0 
-             hover:before:w-full hover:before:bg-button
+      @apply relative overflow-hidden transition-all before:absolute before:bottom-0 before:left-0 before:top-0 before:z-0 before:h-full before:w-0 before:bg-background-secondary before:transition-all before:duration-500 hover:text-white hover:before:left-0 hover:before:w-full hover:before:bg-button
     }
   
     .btn-swipe > * {

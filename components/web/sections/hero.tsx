@@ -63,7 +63,7 @@ export default function Hero({ sections }: HeroProps) {
                   Nous aidons à développer l&apos;éducation, les loisirs et la santé.
                 </div>
                 <p className="els-text-lg">
-                  Nous pensons que chacun a le droit d'être éduqué, soigné et
+                  Nous pensons que chacun a le droit d&apos;être éduqué, soigné et
                   protégé. Nous apportons notre pierre pour que chacun puisse
                   vivre dans un environnement sain.
                 </p>

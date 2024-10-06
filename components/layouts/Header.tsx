@@ -1,5 +1,4 @@
 'use client'
-import { Link } from '@/src/navigation'
 import { useTranslations } from 'next-intl'
 import { usePathname } from 'next/navigation'
 import { Dispatch, FC, SetStateAction, useState, useEffect } from 'react'

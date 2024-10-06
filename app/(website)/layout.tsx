@@ -4,16 +4,10 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import Head from "next/head";
 import {
-  VisualEditing,
   toPlainText,
-  type PortableTextBlock,
 } from "next-sanity";
 import { Inter } from "next/font/google";
-import { draftMode } from "next/headers";
 import { Suspense } from "react";
-
-import AlertBanner from "./alert-banner";
-import PortableText from "./portable-text";
 
 import type { SettingsQueryResult } from "@/sanity.types";
 import * as demo from "@/sanity/lib/demo";
@@ -104,13 +98,13 @@ export default function RootLayout({
         <meta name="theme-color" content="#ffffff" />
       </Head>
       <body>
-          {draftMode().isEnabled && <AlertBanner />}
-          <Header />
+          <Suspense>
+            <Header />
+          </Suspense>
           <main>{children}</main>
           <Suspense>
             <Footer />
           </Suspense>
-        {draftMode().isEnabled && <VisualEditing />}
         <SpeedInsights />
       </body>
     </html>
