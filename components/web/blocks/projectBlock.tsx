@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 type Project = {
   id: string;
@@ -115,12 +116,15 @@ export default function ProjectBlock({
       <section className="row section-project">
         <div className="col-12 col-md-4 project__image">
           <div className="img-wrapper">
-            <img
+            <Image
+              height={300}
+              width={300}
               src={
                 project.projectImg ??
                 "https://images.pexels.com/photos/547114/pexels-photo-547114.jpeg"
               }
               alt={project.title}
+              className="w-full h-full"
             />
           </div>
           <div className="subtext-wrapper">
