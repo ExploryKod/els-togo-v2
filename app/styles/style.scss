@@ -26,7 +26,7 @@
 
 // 3. Base stuff
 
- 
+.width-scss { 
 @import 'base/base';
 @import 'base/fonts';
 @import 'base/typography';
@@ -54,3 +54,4 @@
 
 // 6. Page-specific styles
 @import 'pages/project';
+}
