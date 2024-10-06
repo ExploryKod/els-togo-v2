@@ -63,8 +63,8 @@ $primary-darken: darken(#004aad, 4%);
 $primary-05: rgb(0, 74, 173, 0.5);
 $primary-08: rgb(0, 74, 173, 0.8);
 
-$secondary: #0036a3;
-$secondary-darken: darken(#0036a3, 4%);
+$secondary: #8e61e0;
+$secondary-darken: darken(#8e61e0, 4%);
 $secondary-08: rgba(0, 54, 163, 0.8);
 
 $tertiary: #00AD9C;
@@ -104,6 +104,8 @@ $colors: (
   'tertiary': $tertiary,
   'tertiary-darken': $tertiary-darken,
   'tertiary-08': $tertiary-08,
+  'horizon': $horizon,
+  'horizon-darken': $horizon-darken,
 
   'gray-100': $gray-100,
   'gray-200': $gray-200,

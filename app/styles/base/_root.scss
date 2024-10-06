@@ -8,6 +8,7 @@
   --header-height: 70px;
   --header-padding: 5px 15px;
   --header-logo-padding: 5px 0;
+  --content-min-h: calc(100vh - var(--header-height, 0px))
 
   // Sections
   --section-padding-top: 40px;
@@ -47,16 +48,15 @@
     --title-lg-size: 35px;
   }
 
+  // Transformation des variables scss en variable css de couleurs avec tailwind qui les reprends 
   @each $state-color, $value in $state-colors {
-    --color-#{$state-color}: #{$value};
-    --color-rgb-#{$state-color}: #{hex-to-rgb($value)};
-    // --color-hsl-#{$state-color}: #{hex-to-hsl($value)};
+    --#{$state-color}: #{$value};
+    --rgb-#{$state-color}: #{hex-to-rgb($value)};
   }
 
   @each $color, $value in $colors {
-    --color-#{$color}: #{$value};
-    --color-rgb-#{$color}: #{hex-to-rgb($value)};
-    // --color-hsl-#{$color}: #{hex-to-hsl($value)};
+    --els-#{$color}: #{$value};
+    --els-rgb-#{$color}: #{hex-to-rgb($value)};
   }
 
   @each $spacing, $value in $spacings {
@@ -67,10 +67,11 @@
     --font-level-#{$size}: #{$value};
   }
 
+  
   @each $color, $value in $theme-colors {
     --#{$custom-variable-prefix}#{$color}: #{$value};
   }
-
+  
   @each $bp, $value in $grid-breakpoints {
     --#{$custom-variable-prefix}breakpoint-#{$bp}: #{$value};
   }

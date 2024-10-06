@@ -1,20 +1,27 @@
 @charset "UTF-8";
+$theme-colors: ();
 
-// 1. Configuration and helpers
-@import 'abstracts/functions';
-@import 'abstracts/variables';
-@import 'abstracts/mixins';
-@import 'abstracts/animations';
-@import 'abstracts/keyframes';
-@import 'abstracts/responsive';
+   // 1. Configuration and helpers
+   @import 'abstracts/functions';
+   @import 'abstracts/variables';
+   @import 'abstracts/mixins';
+   @import 'abstracts/animations';
+   @import 'abstracts/keyframes';
+   @import 'abstracts/responsive';
+
 
 // 2. Vendors
-@import '../../lib/bootstrap5/scss/bootstrap-reboot.scss';
-@import '../../lib/bootstrap5/scss/bootstrap-grid.scss';
-@import '../../lib/bootstrap5/scss/card';
+.with-scss.boostrap-active {
+    @import '../../lib/bootstrap5/scss/bootstrap-reboot.scss';
+    @import '../../lib/bootstrap5/scss/bootstrap-grid.scss';
+    @import '../../lib/bootstrap5/scss/card';
+}
+
+@import 'base/root';
 
 // 3. Base stuff
-@import 'base/root';
+.with-scss {
+ 
 @import 'base/base';
 @import 'base/fonts';
 @import 'base/typography';
@@ -48,3 +55,4 @@
 
 // 7. Themes
 @import 'themes/default';
+}

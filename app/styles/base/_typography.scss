@@ -24,11 +24,11 @@ h6 {
 // Basic styles for links
 a {
   color: makeCSSVariables('primary');
-  text-decoration: none;
+  text-decoration: none !important;
 
   @include on-event {
     color: makeCSSVariables('primary-darken');
-    text-decoration: underline;
+    text-decoration: underline !important;
   }
 }
 
