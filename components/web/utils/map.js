@@ -28,7 +28,7 @@ const Map = () => {
     // Create a MapTiler Layer inside Leaflet
     const mtLayer = new MaptilerLayer({
       // Get your free API key at https://cloud.maptiler.com
-      apiKey: "IG3Ucy2xwBn6EtbZNZqd",
+      apiKey: process.env.MAP_API_KEY || "",
     }).addTo(map.current);
 
   }, [center.lng, center.lat, zoom]);
