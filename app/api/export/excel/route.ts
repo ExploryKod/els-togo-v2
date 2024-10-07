@@ -19,7 +19,8 @@ interface Project {
 export async function GET() {
  
   try {
-    let data = await fetch('http://localhost:3000/project.json')
+    const SERVER_PATH = process.env.NEXT_PUBLIC_MOD !== 'production' ? process.env.ROOT_DEV : process.env.ROOT_PATH
+    let data = await fetch(SERVER_PATH + 'project.json')
     let projects: Project[] = await data.json()
 
     // Create a new workbook

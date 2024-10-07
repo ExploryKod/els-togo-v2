@@ -3,8 +3,9 @@ import * as XLSX from 'xlsx';
 
 export async function GET(req: Request) {
   try {
-    // Use fetch to load the file as a blob (public URL)
-    const response = await fetch('http://localhost:3000/projects.xlsx'); // Adjust URL for your environment
+    // Use fetch to load the file alocalhost:3000s a blob (public URL)
+    const SERVER_PATH = process.env.NEXT_PUBLIC_MOD !== 'production' ? process.env.ROOT_DEV : process.env.ROOT_PATH
+    const response = await fetch(SERVER_PATH + '/projects.xlsx'); // Adjust URL for your environment
 
     if (!response.ok) {
       return NextResponse.json({ error: 'Failed to load Excel file' }, { status: 404 });
