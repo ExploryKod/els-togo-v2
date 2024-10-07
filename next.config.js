@@ -12,6 +12,10 @@ module.exports = {
       {
         hostname: 'picsum.photos',
       },
+      {
+        protocol: 'https',
+        hostname: 'images.pexels.com',
+      }
     ],
   },
 };

@@ -21,8 +21,22 @@ type Props = {
   params: { slug: string };
 };
 
+async function getData() {
+  const SERVER_PATH = process.env.NEXT_PUBLIC_MOD !== 'production' ? process.env.ROOT_DEV : process.env.ROOT_PATH
+  const res = await fetch(SERVER_PATH + '/api/projects/details')
+  // The return value is *not* serialized
+ 
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error('Failed to fetch data')
+  }
+ 
+  return res.json()
+}
+
 export default async function Page({ params }: Props) {
   const { slug } = params;
+ 
   const emptyProject:Project = { 
     id: "",
     slug: "",
@@ -39,15 +53,19 @@ export default async function Page({ params }: Props) {
   let nextProject:Project = emptyProject;
   let previousProject:Project = emptyProject;
 
-  if(process.env.NEXT_PUBLIC_MOD === "production") {
-    const file = await fs.readFile(process.env.ROOT_PATH + '/project.json', 'utf8');
-    const jsonProjects: Project[] = JSON.parse(file);
-    projectIndex = jsonProjects.findIndex((p) => p.id === slug);
-  } else {
-    const file = await fs.readFile(process.cwd() + '/public/project.json', 'utf8');
-    const jsonProjects: Project[] = JSON.parse(file);
-    projectIndex = jsonProjects.findIndex((p) => p.id === slug);
-  }
+  jsonProjects = await getData();
+  console.log(jsonProjects);
+  projectIndex = jsonProjects.findIndex((p) => p.id === slug);
+  
+  // if(process.env.NEXT_PUBLIC_MOD === "production") {
+  //   const file = await fs.readFile(process.env.ROOT_PATH + '/project.json', 'utf8');
+  //   const jsonProjects: Project[] = JSON.parse(file);
+  //   projectIndex = jsonProjects.findIndex((p) => p.id === slug);
+  // } else {
+  //   const file = await fs.readFile(process.cwd() + '/public/project.json', 'utf8');
+  //   const jsonProjects: Project[] = JSON.parse(file);
+  //   projectIndex = jsonProjects.findIndex((p) => p.id === slug);
+  // }
  
   if (projectIndex === -1) {
     return <NotFoundWithProps isError={true} message={{text:"Projet en cours de rédaction", color:""}} subject={{text:"En attendant, consultez les autres projets", color:"primary"}} isTextColumn={true}/>  
