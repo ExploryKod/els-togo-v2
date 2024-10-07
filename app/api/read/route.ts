@@ -6,7 +6,9 @@ function getErrorMessage(error: unknown) {
 	return String(error)
 }
 
-const reportError = ({ message }: { message: string }) => {}
+const reportError = ({ message }: { message: string }) => {
+  return message
+}
 
 
 export async function GET(req: NextRequest) {
@@ -20,5 +22,6 @@ export async function GET(req: NextRequest) {
   } catch (error) {
     //https://kentcdodds.com/blog/get-a-catch-block-error-message-with-typescript
     reportError({ message: getErrorMessage(error) })
+    return NextResponse.json({ error: `Failed to read file` }, { status: 500 });
   }
 }
