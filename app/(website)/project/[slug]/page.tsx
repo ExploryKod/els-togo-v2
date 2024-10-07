@@ -23,10 +23,24 @@ type Props = {
 
 export default async function Page({ params }: Props) {
   const { slug } = params;
+  const emptyProject:Project = { 
+    id: "",
+    slug: "",
+    title: "Projet non trouvé",
+    description: "",
+    goal: "",
+    howWeDo: "",
+    results: "",
+    date: "",
+    projectImg: "",
+  }
   let projectIndex:number;
   let jsonProjects: Project[] = [];
+  let nextProject:Project = emptyProject;
+  let previousProject:Project = emptyProject;
+
   if(process.env.NEXT_PUBLIC_MOD === "production") {
-    const file = await fs.readFile('https://www.els-togo-association.org/project.json', 'utf8');
+    const file = await fs.readFile(process.env.ROOT_PATH + '/project.json', 'utf8');
     const jsonProjects: Project[] = JSON.parse(file);
     projectIndex = jsonProjects.findIndex((p) => p.id === slug);
   } else {
@@ -38,17 +52,18 @@ export default async function Page({ params }: Props) {
   if (projectIndex === -1) {
     return <NotFoundWithProps isError={true} message={{text:"Projet en cours de rédaction", color:""}} subject={{text:"En attendant, consultez les autres projets", color:"primary"}} isTextColumn={true}/>  
   }
-   
-  const project = jsonProjects[projectIndex];
-  const previousProject = projectIndex > 0 ? jsonProjects[projectIndex - 1] : null;
-  const nextProject = projectIndex < jsonProjects.length - 1 ? jsonProjects[projectIndex + 1] : null;
 
-  if(!project.description) {
+  console.log(projectIndex);
+  const project: Project = projectIndex >= 0 ? jsonProjects[projectIndex] : emptyProject;
+  previousProject = projectIndex > 0 ? jsonProjects[projectIndex - 1] : emptyProject;
+  nextProject = projectIndex < jsonProjects.length - 1 ? jsonProjects[projectIndex + 1] : emptyProject;
+
+  if(!project) {
     return <div className="min-h-screen project-page">
         <div className="flex flex-col gap-5 container">
             <section className="inter-post-section">
             <div className={`inter-post-wrapper flex gap-5 ${nextProject && previousProject ? "previous-and-next-links" : "only-one-link"}`}>
-            {previousProject && (
+            {previousProject && previousProject.id !== "" ? (
                 <Link
                 href={`/project/${previousProject.id}`}
                 className="els-text-link els-text-link--blue inter-post-link previous-link"
@@ -72,9 +87,9 @@ export default async function Page({ params }: Props) {
                 </span>
                 <span className="inter-post-text">Précédent</span>
                 </Link>
-            )}
+            ): null}
 
-            {nextProject && (
+            {nextProject && nextProject.id !== "" ? (
                 <Link
                 href={`/project/${nextProject.id}`}
                 className="els-text-link els-text-link--blue inter-post-link next-link"
@@ -98,14 +113,14 @@ export default async function Page({ params }: Props) {
                     </svg>
                 </span>
                 </Link>
-            )}
+            ):null}
             </div>
         </section>
       
         <div  className="flex flex-col justify-center items-center w-full">
             <div className={`min-w-[360px] max-w-[800px] border border-2 border-secondary rounded-lg`}>
               <div className="my-[20px] px-4 py-2">
-                <p className="font-bold text-4xl text-center text-primary">Projet en cours de rédaction. Bientôt disponible !</p>
+                <p className="font-bold text-4xl text-center text-primary">Projet en cours de rédaction ou sans contenu encore. Bientôt disponible !</p>
                 <p className="font-bold text-4xl text-center text-primary">Cliquez sur les flèches pour consulter d&apos;autres projets ou revenez à l&apos;accueil.</p>
               </div>
               <div className="flex flex-col items-center justify-center gap-4 bg-background-secondary px-4 py-2 rounded-b-lg">
@@ -122,14 +137,16 @@ export default async function Page({ params }: Props) {
         </div>
   }
 
+  if(project && !project.title) {
+    return notFound();
+  }
  
-
   return (
     <div className="mx-auto px-5 min-h-screen project-page">
       <div className="container">
         <section className="row section-title">
           <div className="col-12">
-            <h1 className="pre-title pre-title--centered">{project.title}</h1>
+            <h1 className="pre-title pre-title--centered">{project?.title}</h1>
           </div>
         </section>
 

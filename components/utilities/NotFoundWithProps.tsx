@@ -1,6 +1,7 @@
 "use client"
 import React from 'react'
 import { MyButton } from '../Button'
+import Link  from 'next/link'
 
 type TextMessage = {text: string, text2: string, color?: string}
 interface NotFoundComponentProps {
@@ -39,11 +40,11 @@ const NotFoundWithProps: React.FC<NotFoundComponentProps > = ({
           </div>
 
           <div className="flex justify-center flex-wrap gap-4 items-center bg-background-secondary px-4 py-2 rounded-b-lg">
-            <a className="" href={`/`}>
+            <Link className="" href={`/`}>
               <MyButton className="" rounded variant={"secondary"} size='medium'>
                 <span className="before:z-lg">Retour</span>
               </MyButton>
-            </a>
+            </Link>
           </div>
         
       </div>
