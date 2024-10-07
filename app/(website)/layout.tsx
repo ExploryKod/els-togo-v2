@@ -17,19 +17,13 @@ import { resolveOpenGraphImage } from "@/sanity/lib/utils";
 import Header from "@/components/web/layouts/header";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const settings = await sanityFetch<SettingsQueryResult>({
-    query: settingsQuery,
-    // Metadata should never contain stega
-    stega: false,
-  });
-  const title = settings?.title || demo.title;
-  const description = settings?.description || demo.description;
-
-  const ogImage = resolveOpenGraphImage(settings?.ogImage);
+  const title = "ELS TOGO"
+  const description = "Une association togolaise basé à Tsévié"
+  let ogImage = "";
   let metadataBase: URL | undefined = undefined;
   try {
-    metadataBase = settings?.ogImage?.metadataBase
-      ? new URL(settings.ogImage.metadataBase)
+    metadataBase = process.env.ROOT_PATH
+      ? new URL(process.env.ROOT_PATH)
       : undefined;
   } catch {
     // ignore
@@ -40,7 +34,7 @@ export async function generateMetadata(): Promise<Metadata> {
       template: `%s | ${title}`,
       default: title,
     },
-    description: toPlainText(description),
+    description: description,
     openGraph: {
       images: ogImage ? [ogImage] : [],
     },
