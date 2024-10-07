@@ -23,19 +23,22 @@ type Props = {
 
 export default async function Page({ params }: Props) {
   const { slug } = params;
-  console.log(slug);
-  const file = await fs.readFile(process.cwd() + '/public/project.json', 'utf8');
-  const jsonProjects: Project[] = JSON.parse(file);
-
-  const projectIndex = jsonProjects.findIndex((p) => p.id === slug);
-  console.log(projectIndex)
-
+  let projectIndex:number;
+  let jsonProjects: Project[] = [];
+  if(process.env.NEXT_PUBLIC_MOD === "production") {
+    const file = await fs.readFile('https://www.els-togo-association.org/project.json', 'utf8');
+    const jsonProjects: Project[] = JSON.parse(file);
+    projectIndex = jsonProjects.findIndex((p) => p.id === slug);
+  } else {
+    const file = await fs.readFile(process.cwd() + '/public/project.json', 'utf8');
+    const jsonProjects: Project[] = JSON.parse(file);
+    projectIndex = jsonProjects.findIndex((p) => p.id === slug);
+  }
+ 
   if (projectIndex === -1) {
     return <NotFoundWithProps isError={true} message={{text:"Projet en cours de rédaction", color:""}} subject={{text:"En attendant, consultez les autres projets", color:"primary"}} isTextColumn={true}/>  
   }
    
- 
-
   const project = jsonProjects[projectIndex];
   const previousProject = projectIndex > 0 ? jsonProjects[projectIndex - 1] : null;
   const nextProject = projectIndex < jsonProjects.length - 1 ? jsonProjects[projectIndex + 1] : null;
