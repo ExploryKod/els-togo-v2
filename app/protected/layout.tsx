@@ -4,8 +4,8 @@ import ToastProvider from "@/components/ToastProvider";
 import Link from "next/link";
 import {ReactQueryClientProvider} from "@/utils/providers/ReactQueryProvider";
 
-const defaultUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
+const defaultUrl = process.env.ROOT_PATH
+  ? `https://${process.env.ROOT_PATH}`
   : "http://localhost:3000/protected";
 
 export const metadata = {
@@ -23,33 +23,8 @@ export default function RootLayout({
       <ReactQueryClientProvider>
       <html lang="en" className={GeistSans.className}>
     <body className="bg-background text-foreground">
-    <div className="h-screen flex flex-col md:grid md:grid-cols-[240px_1fr]">
-
-        <nav className="md:grid-cols-1 md:max-w-[240px] border-r bg-gray-100/40 dark:bg-gray-800/40">
-            <div className="flex md:h-full max-h-screen md:flex-col gap-2">
-                <div className="flex h-[60px] items-center border-b px-6">
-                    <Link
-                        className="flex items-center gap-2 font-semibold"
-                        href="/"
-                    >
-                        <LayoutDashboardIcon className="h-6 w-6"/>
-                        <span className="">Dashboard</span>
-                    </Link>
-                </div>
-                <div className="flex-1 overflow-auto py-2">
-                    <nav className="grid items-start px-4 text-sm font-medium">
-                        <Link
-                            className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
-                            href="/"
-                        >
-                            <UsersIcon className="h-4 w-4"/>
-                            Account
-                        </Link>
-                    </nav>
-                </div>
-            </div>
-        </nav>
-        <main className="md:grid-cols-2 flex flex-col overflow-scroll items-center">
+    <div className="flex flex-col md:grid md:grid-cols-[240px_1fr] h-screen">
+        <main className="flex flex-col items-center md:grid-cols-2 overflow-scroll">
             <ToastProvider>
                 {children}
             </ToastProvider>

@@ -8,7 +8,6 @@ import { toFormState } from "@/utils/forms/getFormStateErrors";
 import {createClient} from "@/utils/supabase/client";
 import {PostgrestSingleResponse} from "@supabase/supabase-js";
 import {redirect} from "next/navigation";
-import { useInsertToSupabase } from '../../../../components/hook/supabase/useInsertToSupabase'
 
 const createMessageSchema = z.object({
     section_text: z.string().min(1).max(191),
@@ -32,11 +31,7 @@ export const createMessage = async (formData: FormData) => {
     });
 
     try {
-        const { error } = await useInsertToSupabase({
-            section_text: section_text,
-            section_title: section_title,
-        })
-
+    	console.info("need a try here")
     } catch (error) {
         return getFormStateError(error)
     }
