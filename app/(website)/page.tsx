@@ -5,6 +5,7 @@ import { ProjectSection } from "@/components/web/sections/project";
 import Team from "@/components/web/sections/team";
 import ElsMasonry from "@/components/web/utils/elsMasonry";
 import dynamic from "next/dynamic";
+import PROJECTS from "./front-project"
 
 async function getProjectData() {
   const SERVER_PATH = process.env.NEXT_PUBLIC_MOD !== 'production' ? process.env.ROOT_DEV : process.env.ROOT_PATH
@@ -33,7 +34,7 @@ const DATA = [
 ]
 
 
-const projects = getProjectData()
+const projects:any = await getProjectData() || PROJECTS;
   // const file = await fs.readFile(process.cwd() + '/public/front-projects.json', 'utf8');
   // const projects = JSON.parse(file);
   // console.log(process.cwd());

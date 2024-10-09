@@ -16,7 +16,7 @@ export const PROJECTS: Partial<Project[]> = [
     {
       id: 1,
       column: 1,
-      title: "Projet 1",
+      title: "Projet de test",
       height: "150",
       date: "2023-09-01",
       place: "Lomé, Togo",
