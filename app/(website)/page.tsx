@@ -5,7 +5,7 @@ import { ProjectSection } from "@/components/web/sections/project";
 import Team from "@/components/web/sections/team";
 import ElsMasonry from "@/components/web/utils/elsMasonry";
 import dynamic from "next/dynamic";
-import PROJECTS from "./front-project"
+import { PROJECTS } from "./front-project"
 
 async function getProjectData() {
   const SERVER_PATH = process.env.NEXT_PUBLIC_MOD !== 'production' ? process.env.ROOT_DEV : process.env.ROOT_PATH
