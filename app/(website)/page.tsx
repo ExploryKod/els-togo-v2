@@ -5,10 +5,19 @@ import { ProjectSection } from "@/components/web/sections/project";
 import Team from "@/components/web/sections/team";
 import ElsMasonry from "@/components/web/utils/elsMasonry";
 import dynamic from "next/dynamic";
-import { useMemo } from "react";
-import type { Project } from "@/components/web/utils/elsMasonry";
-import { UploadForm } from "@/components/uploadForm/uploadForm";
-import { promises as fs } from 'fs';
+
+async function getProjectData() {
+  const SERVER_PATH = process.env.NEXT_PUBLIC_MOD !== 'production' ? process.env.ROOT_DEV : process.env.ROOT_PATH
+  const res = await fetch(SERVER_PATH + '/api/projects')
+  // The return value is *not* serialized
+ 
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error('Failed to fetch data')
+  }
+ 
+  return res.json()
+}
 
 
 export default async function Page() {
@@ -23,9 +32,13 @@ const DATA = [
   { image: 'https://picsum.photos/seed/random103/500/500' },
 ]
 
-  const file = await fs.readFile(process.cwd() + '/public/front-projects.json', 'utf8');
-  const projects = JSON.parse(file);
-  console.log(process.cwd());
+
+const projects = getProjectData()
+  // const file = await fs.readFile(process.cwd() + '/public/front-projects.json', 'utf8');
+  // const projects = JSON.parse(file);
+  // console.log(process.cwd());
+  
+console.log(projects);
 
 
   const sections = {

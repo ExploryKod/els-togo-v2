@@ -14,7 +14,7 @@ export async function GET(req: NextRequest) {
         //const { data } = await supabase.from('projects').select()
         //console.log(data);
         const SERVER_PATH = process.env.NEXT_PUBLIC_MOD !== 'production' ? process.env.ROOT_DEV : process.env.ROOT_PATH
-        let data = await fetch(SERVER_PATH + '/front-projects.json')
+        let data = await fetch('http://127.0.0.1:3000/front-projects.json')
         let projects = await data.json()
         revalidatePath('/api/projects');
         return NextResponse.json(projects);
