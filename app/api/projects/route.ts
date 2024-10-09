@@ -4,7 +4,6 @@ import {revalidatePath} from "next/cache";
 export const dynamic = 'force-dynamic' // defaults to auto
 
 export async function GET(req: NextRequest) {
-    //const supabase = createClient()
 
     try {
         //const { data } = await supabase.from('projects').select()
