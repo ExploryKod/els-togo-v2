@@ -1,20 +1,34 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
+import { ProjectDataSourceFactory } from "@/lib/dataSources/projectDataSource";
 
-import {revalidatePath} from "next/cache";
 export const dynamic = 'force-dynamic' // defaults to auto
 
 export async function GET(req: NextRequest) {
-
     try {
-        //const { data } = await supabase.from('projects').select()
-        //console.log(data);
-        const SERVER_PATH = process.env.NEXT_PUBLIC_MOD !== 'production' ? process.env.ROOT_DEV : process.env.ROOT_PATH
-        let data = await fetch(SERVER_PATH + '/front-projects.json')
-        let projects = await data.json()
+        // Fetch projects using flexible data source with fallback
+        const projects = await ProjectDataSourceFactory.fetchProjectsWithFallback();
+
+        // For front page, we might want to limit the data returned
+        const frontPageProjects = projects.map(project => ({
+            id: project.id,
+            slug: project.slug,
+            title: project.title,
+            accroche: project.accroche,
+            description: project.description,
+            date: project.date,
+            place: project.place,
+            category: project.category,
+            projectImg: project.projectImg,
+        }));
+
         revalidatePath('/api/projects');
-        return NextResponse.json(projects);
+        return NextResponse.json(frontPageProjects);
     } catch(error) {
-        console.error(error)
-        return NextResponse.json(error);
+        console.error("Error fetching projects:", error);
+        return NextResponse.json({ 
+            error: "Failed to fetch projects from all data sources",
+            details: error instanceof Error ? error.message : "Unknown error"
+        }, { status: 500 });
     }
 }

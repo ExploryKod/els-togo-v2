@@ -45,6 +45,7 @@ const Carousel = ({
                 className="pointer-events-none"
                 alt={`carousel-image-${i}`}
                 fill
+                sizes="100vw"
                 src={v.image || 'https://random.imagecdn.app/500/500'}
               />
             </div>

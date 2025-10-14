@@ -1,20 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
-import {revalidatePath} from "next/cache";
+import { revalidatePath } from "next/cache";
+import { ProjectDataSourceFactory } from "@/lib/dataSources/projectDataSource";
+
 export const dynamic = 'force-dynamic' // defaults to auto
 
 export async function GET(req: NextRequest) {
-    //const supabase = createClient()
-
     try {
-        //const { data } = await supabase.from('projects').select()
-        //console.log(data);
-        const SERVER_PATH = process.env.NEXT_PUBLIC_MOD !== 'production' ? process.env.ROOT_DEV : process.env.ROOT_PATH
-        let data = await fetch(SERVER_PATH + '/project.json')
-        let projects = await data.json()
+        // Fetch projects using flexible data source with fallback
+        const projects = await ProjectDataSourceFactory.fetchProjectsWithFallback();
+
         revalidatePath('/api/projects/details');
         return NextResponse.json(projects);
     } catch(error) {
-        console.error(error)
-        return NextResponse.json(error);
+        console.error("Error fetching projects:", error);
+        return NextResponse.json({ 
+            error: "Failed to fetch projects from all data sources",
+            details: error instanceof Error ? error.message : "Unknown error"
+        }, { status: 500 });
     }
 }

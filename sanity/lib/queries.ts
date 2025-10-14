@@ -5,14 +5,17 @@ export const settingsQuery = groq`*[_type == "elsTogoSettings"][0]`;
 // Els Togo specific queries
 export const projectsQuery = groq`*[_type == "project"] | order(_createdAt desc) {
   _id,
+  id,
   title,
+  accroche,
   description,
-  projectCategory,
-  projectImage,
-  projectStatus,
-  startDate,
-  endDate,
-  location,
+  goal,
+  howWeDo,
+  results,
+  date,
+  place,
+  category,
+  projectImg,
   "slug": slug.current
 }`;
 

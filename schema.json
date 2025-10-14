@@ -1457,7 +1457,21 @@
           "type": "string"
         }
       },
+      "id": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "title": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "accroche": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
@@ -1471,36 +1485,49 @@
         },
         "optional": true
       },
-      "projectCategory": {
+      "goal": {
         "type": "objectAttribute",
         "value": {
-          "type": "union",
-          "of": [
-            {
-              "type": "string",
-              "value": "web-development"
-            },
-            {
-              "type": "string",
-              "value": "mobile-app"
-            },
-            {
-              "type": "string",
-              "value": "design"
-            },
-            {
-              "type": "string",
-              "value": "consulting"
-            },
-            {
-              "type": "string",
-              "value": "other"
-            }
-          ]
+          "type": "string"
         },
         "optional": true
       },
-      "projectImage": {
+      "howWeDo": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "results": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "date": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "place": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "category": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "projectImg": {
         "type": "objectAttribute",
         "value": {
           "type": "object",
@@ -1566,52 +1593,6 @@
               }
             }
           }
-        },
-        "optional": true
-      },
-      "projectStatus": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "union",
-          "of": [
-            {
-              "type": "string",
-              "value": "planning"
-            },
-            {
-              "type": "string",
-              "value": "in-progress"
-            },
-            {
-              "type": "string",
-              "value": "completed"
-            },
-            {
-              "type": "string",
-              "value": "on-hold"
-            }
-          ]
-        },
-        "optional": true
-      },
-      "startDate": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "endDate": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "location": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
         },
         "optional": true
       },

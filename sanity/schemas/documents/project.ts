@@ -8,10 +8,24 @@ export default defineType({
   type: "document",
   fields: [
     defineField({
+      name: "id",
+      title: "Project ID",
+      type: "string",
+      description: "Unique identifier for the project (e.g., project-1)",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: "title",
       title: "Project Title",
       type: "string",
       validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "accroche",
+      title: "Accroche (Hook)",
+      type: "text",
+      rows: 2,
+      description: "Short catchy description or tagline",
     }),
     defineField({
       name: "description",
@@ -20,21 +34,46 @@ export default defineType({
       rows: 4,
     }),
     defineField({
-      name: "projectCategory",
-      title: "Project Category",
-      type: "string",
-      options: {
-        list: [
-          { title: "Web Development", value: "web-development" },
-          { title: "Mobile App", value: "mobile-app" },
-          { title: "Design", value: "design" },
-          { title: "Consulting", value: "consulting" },
-          { title: "Other", value: "other" },
-        ],
-      },
+      name: "goal",
+      title: "Project Goal",
+      type: "text",
+      rows: 4,
+      description: "What was the main goal of this project?",
     }),
     defineField({
-      name: "projectImage",
+      name: "howWeDo",
+      title: "How We Do It",
+      type: "text",
+      rows: 4,
+      description: "Describe the process and approach used for this project.",
+    }),
+    defineField({
+      name: "results",
+      title: "Results",
+      type: "text",
+      rows: 3,
+      description: "What were the outcomes and results of this project?",
+    }),
+    defineField({
+      name: "date",
+      title: "Date",
+      type: "string",
+      description: "Project date (e.g., 'Date 1', '2024', etc.)",
+    }),
+    defineField({
+      name: "place",
+      title: "Place",
+      type: "string",
+      description: "Location or place of the project",
+    }),
+    defineField({
+      name: "category",
+      title: "Category",
+      type: "string",
+      description: "Project category",
+    }),
+    defineField({
+      name: "projectImg",
       title: "Project Image",
       type: "image",
       options: {
@@ -53,35 +92,6 @@ export default defineType({
       ],
     }),
     defineField({
-      name: "projectStatus",
-      title: "Project Status",
-      type: "string",
-      options: {
-        list: [
-          { title: "Planning", value: "planning" },
-          { title: "In Progress", value: "in-progress" },
-          { title: "Completed", value: "completed" },
-          { title: "On Hold", value: "on-hold" },
-        ],
-      },
-      initialValue: "planning",
-    }),
-    defineField({
-      name: "startDate",
-      title: "Start Date",
-      type: "date",
-    }),
-    defineField({
-      name: "endDate",
-      title: "End Date",
-      type: "date",
-    }),
-    defineField({
-      name: "location",
-      title: "Location",
-      type: "string",
-    }),
-    defineField({
       name: "slug",
       title: "Slug",
       type: "slug",
@@ -96,8 +106,8 @@ export default defineType({
   preview: {
     select: {
       title: "title",
-      subtitle: "projectCategory",
-      media: "projectImage",
+      subtitle: "category",
+      media: "projectImg",
     },
   },
 });

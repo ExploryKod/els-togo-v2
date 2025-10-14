@@ -121,8 +121,9 @@ export default function ProjectBlock({
               height={300}
               width={300}
               src={
-                project.projectImg ??
-                "https://images.pexels.com/photos/547114/pexels-photo-547114.jpeg"
+                project.projectImg && project.projectImg.trim() !== "" 
+                  ? project.projectImg
+                  : "https://images.pexels.com/photos/547114/pexels-photo-547114.jpeg"
               }
               alt={project.title}
               className="w-full h-full"

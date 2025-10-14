@@ -53,6 +53,7 @@ const Mission: React.FC<MissionProps> = ({ sections, cards }) => {
                       alt={card.imgAltText || 'Personnes tenant des feuilles'}
                       width={300}
                       height={200} // Adjust dimensions as needed
+                      priority={index === 0}
                     />
                   </div>
                   <div className="card-body">
@@ -68,7 +69,7 @@ const Mission: React.FC<MissionProps> = ({ sections, cards }) => {
               <div className="col-lg-4">
                 <div className="card">
                   <div className="card-image">
-                    <Image src="/assets/img/icons/5236.jpg" alt="personnes tenant des feuilles" width={300} height={200} />
+                    <Image src="/assets/img/icons/5236.jpg" alt="personnes tenant des feuilles" width={300} height={200} priority />
                   </div>
                   <div className="card-body">
                     <h5 className="card-title">Dignité</h5>

@@ -231,10 +231,17 @@ export type Project = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  id?: string;
   title?: string;
+  accroche?: string;
   description?: string;
-  projectCategory?: "web-development" | "mobile-app" | "design" | "consulting" | "other";
-  projectImage?: {
+  goal?: string;
+  howWeDo?: string;
+  results?: string;
+  date?: string;
+  place?: string;
+  category?: string;
+  projectImg?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -246,10 +253,6 @@ export type Project = {
     alt?: string;
     _type: "image";
   };
-  projectStatus?: "planning" | "in-progress" | "completed" | "on-hold";
-  startDate?: string;
-  endDate?: string;
-  location?: string;
   slug?: Slug;
 };
 
@@ -498,13 +501,20 @@ export type SettingsQueryResult = {
   };
 } | null;
 // Variable: projectsQuery
-// Query: *[_type == "project"] | order(_createdAt desc) {  _id,  title,  description,  projectCategory,  projectImage,  projectStatus,  startDate,  endDate,  location,  "slug": slug.current}
+// Query: *[_type == "project"] | order(_createdAt desc) {  _id,  id,  title,  accroche,  description,  goal,  howWeDo,  results,  date,  place,  category,  projectImg,  "slug": slug.current}
 export type ProjectsQueryResult = Array<{
   _id: string;
+  id: string | null;
   title: string | null;
+  accroche: string | null;
   description: string | null;
-  projectCategory: "consulting" | "design" | "mobile-app" | "other" | "web-development" | null;
-  projectImage: {
+  goal: string | null;
+  howWeDo: string | null;
+  results: string | null;
+  date: string | null;
+  place: string | null;
+  category: string | null;
+  projectImg: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -516,10 +526,6 @@ export type ProjectsQueryResult = Array<{
     alt?: string;
     _type: "image";
   } | null;
-  projectStatus: "completed" | "in-progress" | "on-hold" | "planning" | null;
-  startDate: string | null;
-  endDate: string | null;
-  location: string | null;
   slug: string | null;
 }>;
 // Variable: sectionsQuery
