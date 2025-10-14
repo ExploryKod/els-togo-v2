@@ -20,6 +20,14 @@ const Map = () => {
   useEffect(() => {
     if (map.current) return; // stops map from intializing more than once
 
+    // Check if API key is loaded
+    const apiKey = process.env.NEXT_PUBLIC_MAP_API_KEY;
+
+    if (!apiKey) {
+      console.error('MapTiler API key is not set. Please add NEXT_PUBLIC_MAP_API_KEY to your .env.local file');
+      return;
+    }
+
     map.current = new L.Map(mapContainer.current, {
       center: L.latLng(center.lat, center.lng),
       zoom: zoom
@@ -28,7 +36,7 @@ const Map = () => {
     // Create a MapTiler Layer inside Leaflet
     const mtLayer = new MaptilerLayer({
       // Get your free API key at https://cloud.maptiler.com
-      apiKey: process.env.MAP_API_KEY || "",
+      apiKey: apiKey,
     }).addTo(map.current);
 
   }, [center.lng, center.lat, zoom]);

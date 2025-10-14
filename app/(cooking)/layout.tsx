@@ -1,6 +1,4 @@
-import {
-  ClerkProvider
-} from '@clerk/nextjs'
+import ConditionalClerkProvider from '@/components/ConditionalClerkProvider'
 import '../globals.css'
 
 export const metadata = {
@@ -14,7 +12,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <ClerkProvider >
+    <ConditionalClerkProvider>
     <html lang="fr">
       <body>
         <main className="flex justify-center items-center min-h-screen">
@@ -22,6 +20,6 @@ export default function RootLayout({
         </main>
       </body>
     </html>
-    </ClerkProvider>
+    </ConditionalClerkProvider>
   )
 }

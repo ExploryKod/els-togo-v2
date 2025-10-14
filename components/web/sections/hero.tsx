@@ -82,6 +82,7 @@ export default function Hero({ sections }: HeroProps) {
               alt="école"
               width={500} // You can adjust the width and height as needed
               height={300}
+              priority
             />
           </div>
         </div>
