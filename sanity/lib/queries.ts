@@ -1,28 +1,45 @@
 import { groq } from "next-sanity";
 
-export const settingsQuery = groq`*[_type == "settings"][0]`;
+export const settingsQuery = groq`*[_type == "elsTogoSettings"][0]`;
 
-const postFields = /* groq */ `
+// Els Togo specific queries
+export const projectsQuery = groq`*[_type == "project"] | order(_createdAt desc) {
   _id,
-  "status": select(_originalId in path("drafts.**") => "draft", "published"),
-  "title": coalesce(title, "Untitled"),
-  "slug": slug.current,
-  excerpt,
-  coverImage,
-  "date": coalesce(date, _updatedAt),
-  "author": author->{"name": coalesce(name, "Anonymous"), picture},
-`;
-
-export const heroQuery = groq`*[_type == "post" && defined(slug.current)] | order(date desc, _updatedAt desc) [0] {
-  content,
-  ${postFields}
+  title,
+  description,
+  projectCategory,
+  projectImage,
+  projectStatus,
+  startDate,
+  endDate,
+  location,
+  "slug": slug.current
 }`;
 
-export const moreStoriesQuery = groq`*[_type == "post" && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {
-  ${postFields}
+export const sectionsQuery = groq`*[_type == "section"] | order(order asc) {
+  _id,
+  sectionTitle,
+  sectionText,
+  sectionImage,
+  "sectionOrder": order
 }`;
 
-export const postQuery = groq`*[_type == "post" && slug.current == $slug] [0] {
-  content,
-  ${postFields}
+export const membersQuery = groq`*[_type == "member"] | order(_createdAt desc) {
+  _id,
+  name,
+  role,
+  bio,
+  memberImage,
+  email,
+  phone,
+  socialLinks
+}`;
+
+export const cardContentQuery = groq`*[_type == "cardContent"] | order(_createdAt desc) {
+  _id,
+  cardTitle,
+  cardDescription,
+  cardImage,
+  cardCategory,
+  cardLink
 }`;

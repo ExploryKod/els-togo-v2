@@ -68,84 +68,9 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type Post = {
+export type ElsTogoSettings = {
   _id: string;
-  _type: "post";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  slug?: Slug;
-  content?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
-  excerpt?: string;
-  coverImage?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-  };
-  date?: string;
-  author?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "author";
-  };
-};
-
-export type Author = {
-  _id: string;
-  _type: "author";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
-  picture?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-  };
-};
-
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
-};
-
-export type Settings = {
-  _id: string;
-  _type: "settings";
+  _type: "elsTogoSettings";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -199,6 +124,139 @@ export type Settings = {
     metadataBase?: string;
     _type: "image";
   };
+};
+
+export type CardContent = {
+  _id: string;
+  _type: "cardContent";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  cardTitle?: string;
+  cardDescription?: string;
+  cardImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  cardCategory?: "service" | "feature" | "testimonial" | "news" | "other";
+  cardLink?: {
+    url?: string;
+    text?: string;
+    openInNewTab?: boolean;
+  };
+};
+
+export type Member = {
+  _id: string;
+  _type: "member";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  role?: string;
+  bio?: string;
+  memberImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  email?: string;
+  phone?: string;
+  socialLinks?: {
+    linkedin?: string;
+    twitter?: string;
+    github?: string;
+    website?: string;
+  };
+};
+
+export type Section = {
+  _id: string;
+  _type: "section";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  sectionTitle?: string;
+  sectionText?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  sectionImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  order?: number;
+};
+
+export type Project = {
+  _id: string;
+  _type: "project";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  description?: string;
+  projectCategory?: "web-development" | "mobile-app" | "design" | "consulting" | "other";
+  projectImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  projectStatus?: "planning" | "in-progress" | "completed" | "on-hold";
+  startDate?: string;
+  endDate?: string;
+  location?: string;
+  slug?: Slug;
+};
+
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
 };
 
 export type SanityImageCrop = {
@@ -381,10 +439,10 @@ export type SanityAssistSchemaTypeField = {
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./sanity/lib/queries.ts
 // Variable: settingsQuery
-// Query: *[_type == "settings"][0]
+// Query: *[_type == "elsTogoSettings"][0]
 export type SettingsQueryResult = {
   _id: string;
-  _type: "settings";
+  _type: "elsTogoSettings";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -439,10 +497,37 @@ export type SettingsQueryResult = {
     _type: "image";
   };
 } | null;
-// Variable: heroQuery
-// Query: *[_type == "post" && defined(slug.current)] | order(date desc, _updatedAt desc) [0] {  content,    _id,  "status": select(_originalId in path("drafts.**") => "draft", "published"),  "title": coalesce(title, "Untitled"),  "slug": slug.current,  excerpt,  coverImage,  "date": coalesce(date, _updatedAt),  "author": author->{"name": coalesce(name, "Anonymous"), picture},}
-export type HeroQueryResult = {
-  content: Array<{
+// Variable: projectsQuery
+// Query: *[_type == "project"] | order(_createdAt desc) {  _id,  title,  description,  projectCategory,  projectImage,  projectStatus,  startDate,  endDate,  location,  "slug": slug.current}
+export type ProjectsQueryResult = Array<{
+  _id: string;
+  title: string | null;
+  description: string | null;
+  projectCategory: "consulting" | "design" | "mobile-app" | "other" | "web-development" | null;
+  projectImage: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  } | null;
+  projectStatus: "completed" | "in-progress" | "on-hold" | "planning" | null;
+  startDate: string | null;
+  endDate: string | null;
+  location: string | null;
+  slug: string | null;
+}>;
+// Variable: sectionsQuery
+// Query: *[_type == "section"] | order(order asc) {  _id,  sectionTitle,  sectionText,  sectionImage,  "sectionOrder": order}
+export type SectionsQueryResult = Array<{
+  _id: string;
+  sectionTitle: string | null;
+  sectionText: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -460,12 +545,7 @@ export type HeroQueryResult = {
     _type: "block";
     _key: string;
   }> | null;
-  _id: string;
-  status: "draft" | "published";
-  title: string | "Untitled";
-  slug: string | null;
-  excerpt: string | null;
-  coverImage: {
+  sectionImage: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -477,32 +557,16 @@ export type HeroQueryResult = {
     alt?: string;
     _type: "image";
   } | null;
-  date: string;
-  author: {
-    name: string | "Anonymous";
-    picture: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt?: string;
-      _type: "image";
-    } | null;
-  } | null;
-} | null;
-// Variable: moreStoriesQuery
-// Query: *[_type == "post" && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {    _id,  "status": select(_originalId in path("drafts.**") => "draft", "published"),  "title": coalesce(title, "Untitled"),  "slug": slug.current,  excerpt,  coverImage,  "date": coalesce(date, _updatedAt),  "author": author->{"name": coalesce(name, "Anonymous"), picture},}
-export type MoreStoriesQueryResult = Array<{
+  sectionOrder: number | null;
+}>;
+// Variable: membersQuery
+// Query: *[_type == "member"] | order(_createdAt desc) {  _id,  name,  role,  bio,  memberImage,  email,  phone,  socialLinks}
+export type MembersQueryResult = Array<{
   _id: string;
-  status: "draft" | "published";
-  title: string | "Untitled";
-  slug: string | null;
-  excerpt: string | null;
-  coverImage: {
+  name: string | null;
+  role: string | null;
+  bio: string | null;
+  memberImage: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -514,50 +578,22 @@ export type MoreStoriesQueryResult = Array<{
     alt?: string;
     _type: "image";
   } | null;
-  date: string;
-  author: {
-    name: string | "Anonymous";
-    picture: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt?: string;
-      _type: "image";
-    } | null;
+  email: string | null;
+  phone: string | null;
+  socialLinks: {
+    linkedin?: string;
+    twitter?: string;
+    github?: string;
+    website?: string;
   } | null;
 }>;
-// Variable: postQuery
-// Query: *[_type == "post" && slug.current == $slug] [0] {  content,    _id,  "status": select(_originalId in path("drafts.**") => "draft", "published"),  "title": coalesce(title, "Untitled"),  "slug": slug.current,  excerpt,  coverImage,  "date": coalesce(date, _updatedAt),  "author": author->{"name": coalesce(name, "Anonymous"), picture},}
-export type PostQueryResult = {
-  content: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }> | null;
+// Variable: cardContentQuery
+// Query: *[_type == "cardContent"] | order(_createdAt desc) {  _id,  cardTitle,  cardDescription,  cardImage,  cardCategory,  cardLink}
+export type CardContentQueryResult = Array<{
   _id: string;
-  status: "draft" | "published";
-  title: string | "Untitled";
-  slug: string | null;
-  excerpt: string | null;
-  coverImage: {
+  cardTitle: string | null;
+  cardDescription: string | null;
+  cardImage: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -569,26 +605,10 @@ export type PostQueryResult = {
     alt?: string;
     _type: "image";
   } | null;
-  date: string;
-  author: {
-    name: string | "Anonymous";
-    picture: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt?: string;
-      _type: "image";
-    } | null;
+  cardCategory: "feature" | "news" | "other" | "service" | "testimonial" | null;
+  cardLink: {
+    url?: string;
+    text?: string;
+    openInNewTab?: boolean;
   } | null;
-} | null;
-// Source: ./app/(website)/posts/[slug]/page.tsx
-// Variable: postSlugs
-// Query: *[_type == "post"]{slug}
-export type PostSlugsResult = Array<{
-  slug: Slug | null;
 }>;

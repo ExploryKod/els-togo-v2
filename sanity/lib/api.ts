@@ -11,9 +11,10 @@ function assertValue<T>(v: T | undefined, errorMessage: string): T {
   return v;
 }
 
+// Use shared studio configuration
 export const dataset = assertValue(
-  process.env.NEXT_PUBLIC_SANITY_DATASET,
-  "Missing environment variable: NEXT_PUBLIC_SANITY_DATASET",
+  process.env.NEXT_PUBLIC_ELS_TOGO_SANITY_DATASET || process.env.NEXT_PUBLIC_SANITY_DATASET,
+  "Missing environment variable: NEXT_PUBLIC_ELS_TOGO_SANITY_DATASET or NEXT_PUBLIC_SANITY_DATASET",
 );
 
 export const projectId = assertValue(
@@ -29,5 +30,6 @@ export const apiVersion =
 
 /**
  * Used to configure edit intent links, for Presentation Mode, as well as to configure where the Studio is mounted in the router.
+ * Points to the shared studio workspace for els-togo
  */
-export const studioUrl = "/studio";
+export const studioUrl = "/studio/els-togo";
