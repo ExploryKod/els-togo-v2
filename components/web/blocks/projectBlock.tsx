@@ -3,23 +3,12 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-
-type Project = {
-  id: string;
-  slug: string;
-  title: string;
-  description: string;
-  goal: string;
-  howWeDo: string;
-  results: string;
-  date: string;
-  projectImg: string;
-};
+import { ProjectDto } from "@/lib/dto/ProjectDto";
 
 type ProjectBlockProps = {
-  project: Project;
-  previousProject: Project | null;
-  nextProject: Project | null;
+  project: ProjectDto;
+  previousProject: ProjectDto | null;
+  nextProject: ProjectDto | null;
 };
 
 export default function ProjectBlock({
@@ -62,7 +51,7 @@ export default function ProjectBlock({
         <div className={`inter-post-wrapper ${nextProject && previousProject ? "previous-and-next-links" : "only-one-link"}`}>
           {previousProject && (
             <Link
-              href={`/project/${previousProject.id}`}
+              href={`/project/${previousProject.slug}`}
               className="els-text-link els-text-link--blue inter-post-link previous-link"
             >
               <span className="inter-post-icon">
@@ -88,7 +77,7 @@ export default function ProjectBlock({
 
           {nextProject && (
             <Link
-              href={`/project/${nextProject.id}`}
+              href={`/project/${nextProject.slug}`}
               className="els-text-link els-text-link--blue inter-post-link next-link"
             >
               <span className="inter-post-text">Suivant</span>

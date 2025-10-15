@@ -1,89 +1,77 @@
 import { notFound } from "next/navigation";
-import { promises as fs } from 'fs';
 import Link from 'next/link'
 import ProjectBlock from "@/components/web/blocks/projectBlock";
 import NotFoundWithProps from "@/components/utilities/NotFoundWithProps";
 import { MyButton } from "@/components/Button";
-
-type Project = {
-  id: string;
-  slug: string;
-  title: string;
-  description: string;
-  goal: string;
-  howWeDo: string;
-  results: string;
-  date: string;
-  projectImg: string;
-};
+import { ProjectDto } from "@/lib/dto/ProjectDto";
+import { ProjectDataSourceFactory } from "@/lib/dataSources/projectDataSource";
 
 type Props = {
   params: { slug: string };
 };
 
-async function getData() {
-  const SERVER_PATH = process.env.NEXT_PUBLIC_MOD !== 'production' ? process.env.ROOT_DEV : process.env.ROOT_PATH
-  const res = await fetch(SERVER_PATH + '/api/projects/details')
-  // The return value is *not* serialized
- 
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error('Failed to fetch data')
+async function getProjectData(slug: string): Promise<ProjectDto | null> {
+  try {
+    // Use the flexible data source to fetch project by slug
+    const project = await ProjectDataSourceFactory.fetchProjectBySlugWithFallback(slug);
+    return project;
+  } catch (error) {
+    console.error('Error fetching project data:', error);
+    return null;
   }
- 
-  return res.json()
+}
+
+async function getAllProjects(): Promise<ProjectDto[]> {
+  try {
+    // Use the flexible data source to fetch all projects
+    const projects = await ProjectDataSourceFactory.fetchProjectsWithFallback();
+    return projects;
+  } catch (error) {
+    console.error('Error fetching all projects:', error);
+    return [];
+  }
 }
 
 export default async function Page({ params }: Props) {
   const { slug } = params;
  
-  const emptyProject:Project = { 
+  const emptyProject: ProjectDto = { 
     id: "",
     slug: "",
     title: "Projet non trouvé",
+    accroche: "",
     description: "",
     goal: "",
     howWeDo: "",
     results: "",
     date: "",
+    place: "",
+    category: "",
     projectImg: "",
   }
-  let projectIndex:number;
-  let jsonProjects: Project[] = [];
-  let nextProject:Project = emptyProject;
-  let previousProject:Project = emptyProject;
 
-  jsonProjects = await getData();
-  console.log(jsonProjects);
-  projectIndex = jsonProjects.findIndex((p) => p.id === slug);
+  // Fetch the specific project
+  const project = await getProjectData(slug);
   
-  // if(process.env.NEXT_PUBLIC_MOD === "production") {
-  //   const file = await fs.readFile(process.env.ROOT_PATH + '/project.json', 'utf8');
-  //   const jsonProjects: Project[] = JSON.parse(file);
-  //   projectIndex = jsonProjects.findIndex((p) => p.id === slug);
-  // } else {
-  //   const file = await fs.readFile(process.cwd() + '/public/project.json', 'utf8');
-  //   const jsonProjects: Project[] = JSON.parse(file);
-  //   projectIndex = jsonProjects.findIndex((p) => p.id === slug);
-  // }
- 
-  if (projectIndex === -1) {
+  if (!project) {
     return <NotFoundWithProps isError={true} message={{text:"Projet en cours de rédaction", color:""}} subject={{text:"En attendant, consultez les autres projets", color:"primary"}} isTextColumn={true}/>  
   }
 
-  console.log(projectIndex);
-  const project: Project = projectIndex >= 0 ? jsonProjects[projectIndex] : emptyProject;
-  previousProject = projectIndex > 0 ? jsonProjects[projectIndex - 1] : emptyProject;
-  nextProject = projectIndex < jsonProjects.length - 1 ? jsonProjects[projectIndex + 1] : emptyProject;
+  // Fetch all projects to determine previous/next navigation
+  const allProjects = await getAllProjects();
+  const projectIndex = allProjects.findIndex((p) => p.slug === slug);
+  
+  const previousProject = projectIndex > 0 ? allProjects[projectIndex - 1] : emptyProject;
+  const nextProject = projectIndex < allProjects.length - 1 ? allProjects[projectIndex + 1] : emptyProject;
 
   if(!project) {
     return <div className="min-h-screen project-page">
         <div className="flex flex-col gap-5 container">
             <section className="inter-post-section">
             <div className={`inter-post-wrapper flex gap-5 ${nextProject && previousProject ? "previous-and-next-links" : "only-one-link"}`}>
-            {previousProject && previousProject.id !== "" ? (
+            {previousProject && previousProject.slug !== "" ? (
                 <Link
-                href={`/project/${previousProject.id}`}
+                href={`/project/${previousProject.slug}`}
                 className="els-text-link els-text-link--blue inter-post-link previous-link"
                 >
                 <span className="inter-post-icon">
@@ -107,9 +95,9 @@ export default async function Page({ params }: Props) {
                 </Link>
             ): null}
 
-            {nextProject && nextProject.id !== "" ? (
+            {nextProject && nextProject.slug !== "" ? (
                 <Link
-                href={`/project/${nextProject.id}`}
+                href={`/project/${nextProject.slug}`}
                 className="els-text-link els-text-link--blue inter-post-link next-link"
                 >
                 <span className="inter-post-text">Suivant</span>
