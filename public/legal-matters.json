@@ -1,0 +1,26 @@
+{
+  "id": "fallback-legal-matters",
+  "associationInfo": {
+    "associationName": "[Nom de l'association]",
+    "legalRepresentative": "Koffi Azanli",
+    "address": {
+      "street": "[Adresse postale]",
+      "city": "[Ville, Pays]",
+      "country": "Togo"
+    },
+    "contactEmail": "[Email de contact]",
+    "contactPhone": "[Téléphone]"
+  },
+  "technicalInfo": {
+    "hostingProvider": "Vercel",
+    "lastUpdated": "2025-01-15"
+  },
+  "dataProtectionAuthority": {
+    "authorityName": "APDP - Autorité de protection des données du Togo",
+    "authorityWebsite": ""
+  },
+  "legalReferences": {
+    "rgpdReference": "Règlement (UE) 2016/679 du Parlement européen et du Conseil du 27 avril 2016",
+    "togoleseLawReference": "Loi togolaise n°2019-014 relative à la protection des données à caractère personnel"
+  }
+}

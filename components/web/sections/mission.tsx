@@ -62,7 +62,7 @@ const Mission: React.FC<MissionProps> = ({ sections, cards, missionCards }) => {
                     <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-primary rounded-b-lg"></div>
                     
                     {/* Card content */}
-                    <div className="p-6 flex flex-col items-center text-center h-full justify-between">
+                    <div className="p-6 flex flex-col items-center text-center h-full justify-start">
                       {/* Icon/Image */}
                       <div className="relative mb-4 flex-shrink-0">
                         <div className="w-20 h-20 rounded-full overflow-hidden ring-4 ring-gray-100 group-hover:ring-primary transition-all duration-500 ease-out group-hover:shadow-lg bg-white p-2">
@@ -80,7 +80,7 @@ const Mission: React.FC<MissionProps> = ({ sections, cards, missionCards }) => {
                       </div>
                       
                       {/* Card info */}
-                      <div className="space-y-3 flex-grow flex flex-col justify-center">
+                      <div className="space-y-3 flex-grow flex flex-col justify-start">
                         <h3 className="text-lg font-semibold text-gray-900 group-hover:text-primary transition-colors duration-500 ease-out">
                           {displayCard.title}
                         </h3>
@@ -108,7 +108,7 @@ const Mission: React.FC<MissionProps> = ({ sections, cards, missionCards }) => {
                   <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-primary rounded-b-lg"></div>
                   
                   {/* Card content */}
-                  <div className="p-6 flex flex-col items-center text-center h-full justify-between">
+                  <div className="p-6 flex flex-col items-center text-center h-full justify-start">
                     {/* Icon/Image */}
                     <div className="relative mb-4 flex-shrink-0">
                       <div className="w-20 h-20 rounded-full overflow-hidden ring-4 ring-gray-100 group-hover:ring-primary transition-all duration-500 ease-out group-hover:shadow-lg bg-white p-2">
@@ -126,7 +126,7 @@ const Mission: React.FC<MissionProps> = ({ sections, cards, missionCards }) => {
                     </div>
                     
                     {/* Card info */}
-                    <div className="space-y-3 flex-grow flex flex-col justify-center">
+                    <div className="space-y-3 flex-grow flex flex-col justify-start">
                       <h3 className="text-lg font-semibold text-gray-900 group-hover:text-primary transition-colors duration-500 ease-out">
                         {card.title}
                       </h3>
@@ -151,14 +151,14 @@ const Mission: React.FC<MissionProps> = ({ sections, cards, missionCards }) => {
                   }}
                 >
                   <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-primary rounded-b-lg"></div>
-                  <div className="p-6 flex flex-col items-center text-center h-full justify-between">
+                  <div className="p-6 flex flex-col items-center text-center h-full justify-start">
                     <div className="relative mb-4 flex-shrink-0">
                       <div className="w-20 h-20 rounded-full overflow-hidden ring-4 ring-gray-100 group-hover:ring-primary transition-all duration-500 ease-out group-hover:shadow-lg bg-white p-2">
                         <Image src="/assets/img/icons/5236.jpg" alt="personnes tenant des feuilles" width={64} height={64} priority />
                       </div>
                       <div className="absolute inset-0 rounded-full bg-primary opacity-0 group-hover:opacity-10 transition-opacity duration-500 ease-out"></div>
                     </div>
-                    <div className="space-y-3 flex-grow flex flex-col justify-center">
+                    <div className="space-y-3 flex-grow flex flex-col justify-start">
                       <h3 className="text-lg font-semibold text-gray-900 group-hover:text-primary transition-colors duration-500 ease-out">Dignité</h3>
                       <p className="text-sm text-gray-700 leading-relaxed group-hover:text-gray-800 transition-colors duration-500 ease-out">
                         Nous respectons chaque personne et groupe que nous aidons. Nous préférons ainsi accompagner plutôt qu'assister au nom de la dignité.
@@ -176,14 +176,14 @@ const Mission: React.FC<MissionProps> = ({ sections, cards, missionCards }) => {
                   }}
                 >
                   <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-primary rounded-b-lg"></div>
-                  <div className="p-6 flex flex-col items-center text-center h-full justify-between">
+                  <div className="p-6 flex flex-col items-center text-center h-full justify-start">
                     <div className="relative mb-4 flex-shrink-0">
                       <div className="w-20 h-20 rounded-full overflow-hidden ring-4 ring-gray-100 group-hover:ring-primary transition-all duration-500 ease-out group-hover:shadow-lg bg-white p-2">
                         <Image src="/assets/img/icons/5236.jpg" alt="mains assemblant un puzzle" width={64} height={64} />
                       </div>
                       <div className="absolute inset-0 rounded-full bg-primary opacity-0 group-hover:opacity-10 transition-opacity duration-500 ease-out"></div>
                     </div>
-                    <div className="space-y-3 flex-grow flex flex-col justify-center">
+                    <div className="space-y-3 flex-grow flex flex-col justify-start">
                       <h3 className="text-lg font-semibold text-gray-900 group-hover:text-primary transition-colors duration-500 ease-out">Amour</h3>
                       <p className="text-sm text-gray-700 leading-relaxed group-hover:text-gray-800 transition-colors duration-500 ease-out">
                         Nos engagements se font grâce à la formidable force que nous donne l'amour.
@@ -201,14 +201,14 @@ const Mission: React.FC<MissionProps> = ({ sections, cards, missionCards }) => {
                   }}
                 >
                   <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-primary rounded-b-lg"></div>
-                  <div className="p-6 flex flex-col items-center text-center h-full justify-between">
+                  <div className="p-6 flex flex-col items-center text-center h-full justify-start">
                     <div className="relative mb-4 flex-shrink-0">
                       <div className="w-20 h-20 rounded-full overflow-hidden ring-4 ring-gray-100 group-hover:ring-primary transition-all duration-500 ease-out group-hover:shadow-lg bg-white p-2">
                         <Image src="/assets/img/icons/5236.jpg" alt="mains assemblant un puzzle" width={64} height={64} />
                       </div>
                       <div className="absolute inset-0 rounded-full bg-primary opacity-0 group-hover:opacity-10 transition-opacity duration-500 ease-out"></div>
                     </div>
-                    <div className="space-y-3 flex-grow flex flex-col justify-center">
+                    <div className="space-y-3 flex-grow flex flex-col justify-start">
                       <h3 className="text-lg font-semibold text-gray-900 group-hover:text-primary transition-colors duration-500 ease-out">Franchise</h3>
                       <p className="text-sm text-gray-700 leading-relaxed group-hover:text-gray-800 transition-colors duration-500 ease-out">
                         Nous valorisons l'authenticité et l'intégrité. Nous mettons un point d'honneur à être transparent avec nos bénévoles, nos donateurs et nos parties prenantes.
@@ -226,14 +226,14 @@ const Mission: React.FC<MissionProps> = ({ sections, cards, missionCards }) => {
                   }}
                 >
                   <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-primary rounded-b-lg"></div>
-                  <div className="p-6 flex flex-col items-center text-center h-full justify-between">
+                  <div className="p-6 flex flex-col items-center text-center h-full justify-start">
                     <div className="relative mb-4 flex-shrink-0">
                       <div className="w-20 h-20 rounded-full overflow-hidden ring-4 ring-gray-100 group-hover:ring-primary transition-all duration-500 ease-out group-hover:shadow-lg bg-white p-2">
                         <Image src="/assets/img/icons/5236.jpg" alt="mains assemblant un puzzle" width={64} height={64} />
                       </div>
                       <div className="absolute inset-0 rounded-full bg-primary opacity-0 group-hover:opacity-10 transition-opacity duration-500 ease-out"></div>
                     </div>
-                    <div className="space-y-3 flex-grow flex flex-col justify-center">
+                    <div className="space-y-3 flex-grow flex flex-col justify-start">
                       <h3 className="text-lg font-semibold text-gray-900 group-hover:text-primary transition-colors duration-500 ease-out">Partage</h3>
                       <p className="text-sm text-gray-700 leading-relaxed group-hover:text-gray-800 transition-colors duration-500 ease-out">
                         Chaque mission est l'occasion de partager des choses ou des mots avec autrui peu importe d'où il vient. Ce partage s'incarne dans l'échange, la rencontre, le don.

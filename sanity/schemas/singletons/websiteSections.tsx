@@ -64,10 +64,10 @@ export default defineType({
       ],
     }),
 
-    // Project Section
+    // Project Section (Home Page)
     defineField({
       name: 'projectSection',
-      title: 'Project Section',
+      title: 'Project Section (Home Page)',
       type: 'object',
       fields: [
         defineField({
@@ -83,6 +83,37 @@ export default defineType({
           type: 'text',
           rows: 3,
           description: 'Description text for the project section',
+          validation: (rule) => rule.max(300),
+        }),
+      ],
+    }),
+
+    // Projects Page Section
+    defineField({
+      name: 'projectsPageSection',
+      title: 'Projects Page Section',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'pretitle',
+          title: 'Pre-title',
+          type: 'string',
+          description: 'Small text above the main title (e.g., "Découvrez")',
+          validation: (rule) => rule.max(100),
+        }),
+        defineField({
+          name: 'title',
+          title: 'Main Title',
+          type: 'string',
+          description: 'The main headline for the projects page (e.g., "Tous nos projets")',
+          validation: (rule) => rule.required().max(200),
+        }),
+        defineField({
+          name: 'text',
+          title: 'Description Text',
+          type: 'text',
+          rows: 3,
+          description: 'Description text for the projects page',
           validation: (rule) => rule.max(300),
         }),
       ],

@@ -31,11 +31,11 @@ export default function Hero({ sections }: HeroProps) {
                       ? sectionText.pretitle
                       : 'Association ELS - Togo'}
                   </div>
-                  <div className="title">
+                  <h1 className="title">
                     {sectionText.title
                       ? sectionText.title
                       : "Nous aidons à développer l'éducation, les loisirs et la santé."}
-                  </div>
+                  </h1>
                   <p className="els-text-lg">
                     {sectionText.text
                       ? sectionText.text
@@ -59,9 +59,9 @@ export default function Hero({ sections }: HeroProps) {
             ) : (
               <div>
                 <div className="pre-title">Association ELS - Togo</div>
-                <div className="title">
+                <h1 className="title">
                   Nous aidons à développer l&apos;éducation, les loisirs et la santé.
-                </div>
+                </h1>
                 <p className="els-text-lg">
                   Nous pensons que chacun a le droit d&apos;être éduqué, soigné et
                   protégé. Nous apportons notre pierre pour que chacun puisse

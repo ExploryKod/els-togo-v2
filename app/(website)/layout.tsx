@@ -19,17 +19,15 @@ import { resolveOpenGraphImage } from "@/sanity/lib/utils";
 import Header from "@/components/web/layouts/header";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const title = "ELS TOGO"
-  const description = "Une association togolaise basé à Tsévié"
-  let ogImage = "";
-  let metadataBase: URL | undefined = undefined;
-  try {
-    metadataBase = process.env.ROOT_PATH
-      ? new URL(process.env.ROOT_PATH)
-      : undefined;
-  } catch {
-    // ignore
-  }
+  const data = await sanityFetch<SettingsQueryResult>({
+    query: settingsQuery,
+  });
+  
+  const title = data?.title || "ELS TOGO";
+  const description = data?.description ? toPlainText(data.description) : "Une association togolaise basé à Tsévié";
+  const ogImage = data?.ogImage ? resolveOpenGraphImage(data.ogImage) : "";
+  const metadataBase = data?.ogImage?.metadataBase ? new URL(data.ogImage.metadataBase) : undefined;
+  
   return {
     metadataBase,
     title: {
@@ -38,6 +36,14 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     description: description,
     openGraph: {
+      title: title,
+      description: description,
+      images: ogImage ? [ogImage] : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: title,
+      description: description,
       images: ogImage ? [ogImage] : [],
     },
   };
@@ -66,7 +72,7 @@ async function Footer() {
                 </div>
                 <div className="col-12 col-lg-6">
                     <ul className="footer-list">
-                        <li className="text--light text-xs modal-open-btn"><a href="/legal">Mentions légales</a></li>
+                        <li className="text--light text-xs modal-open-btn"><a href="/legal-notices">Mentions légales</a></li>
                         <li className="text--light text-xs modal-open-btn"><a href="/confidentiality">Politique de confidentialité</a></li>
                         <li className="text--light text-xs modal-open-btn"><a href="/credits">Crédits</a></li>
                     </ul>

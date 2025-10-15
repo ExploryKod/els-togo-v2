@@ -68,6 +68,37 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type LegalMatters = {
+  _id: string;
+  _type: "legalMatters";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  associationInfo?: {
+    associationName?: string;
+    legalRepresentative?: string;
+    address?: {
+      street?: string;
+      city?: string;
+      country?: string;
+    };
+    contactEmail?: string;
+    contactPhone?: string;
+  };
+  technicalInfo?: {
+    hostingProvider?: string;
+    lastUpdated?: string;
+  };
+  dataProtectionAuthority?: {
+    authorityName?: string;
+    authorityWebsite?: string;
+  };
+  legalReferences?: {
+    rgpdReference?: string;
+    togoleseLawReference?: string;
+  };
+};
+
 export type WebsiteSections = {
   _id: string;
   _type: "websiteSections";
@@ -85,6 +116,11 @@ export type WebsiteSections = {
   };
   projectSection?: {
     pretitle?: string;
+    text?: string;
+  };
+  projectsPageSection?: {
+    pretitle?: string;
+    title?: string;
     text?: string;
   };
   missionSection?: {
@@ -189,34 +225,6 @@ export type MissionCard = {
   order?: number;
 };
 
-export type CardContent = {
-  _id: string;
-  _type: "cardContent";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  cardTitle?: string;
-  cardDescription?: string;
-  cardImage?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-  };
-  cardCategory?: "service" | "feature" | "testimonial" | "news" | "other";
-  cardLink?: {
-    url?: string;
-    text?: string;
-    openInNewTab?: boolean;
-  };
-};
-
 export type Member = {
   _id: string;
   _type: "member";
@@ -247,46 +255,6 @@ export type Member = {
     github?: string;
     website?: string;
   };
-};
-
-export type Section = {
-  _id: string;
-  _type: "section";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  sectionTitle?: string;
-  sectionText?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
-  sectionImage?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-  };
-  order?: number;
 };
 
 export type Project = {
@@ -613,43 +581,6 @@ export type ProjectsQueryResult = Array<{
   } | null;
   slug: string | null;
 }>;
-// Variable: sectionsQuery
-// Query: *[_type == "section"] | order(order asc) {  _id,  sectionTitle,  sectionText,  sectionImage,  "sectionOrder": order}
-export type SectionsQueryResult = Array<{
-  _id: string;
-  sectionTitle: string | null;
-  sectionText: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }> | null;
-  sectionImage: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-  } | null;
-  sectionOrder: number | null;
-}>;
 // Variable: membersQuery
 // Query: *[_type == "member"] | order(_createdAt desc) {  _id,  firstname,  name,  role,  bio,  memberImage,  email,  phone,  socialLinks}
 export type MembersQueryResult = Array<{
@@ -677,31 +608,6 @@ export type MembersQueryResult = Array<{
     twitter?: string;
     github?: string;
     website?: string;
-  } | null;
-}>;
-// Variable: cardContentQuery
-// Query: *[_type == "cardContent"] | order(_createdAt desc) {  _id,  cardTitle,  cardDescription,  cardImage,  cardCategory,  cardLink}
-export type CardContentQueryResult = Array<{
-  _id: string;
-  cardTitle: string | null;
-  cardDescription: string | null;
-  cardImage: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-  } | null;
-  cardCategory: "feature" | "news" | "other" | "service" | "testimonial" | null;
-  cardLink: {
-    url?: string;
-    text?: string;
-    openInNewTab?: boolean;
   } | null;
 }>;
 // Variable: categoriesQuery
@@ -733,7 +639,7 @@ export type MissionCardsQueryResult = Array<{
   order: number | null;
 }>;
 // Variable: websiteSectionsQuery
-// Query: *[_type == "websiteSections"] | order(_updatedAt desc)[0] {  _id,  heroSection,  projectSection,  missionSection,  teamSection,  contactSection,  contactInfo}
+// Query: *[_type == "websiteSections"] | order(_updatedAt desc)[0] {  _id,  heroSection,  projectSection,  projectsPageSection,  missionSection,  teamSection,  contactSection,  contactInfo}
 export type WebsiteSectionsQueryResult = {
   _id: string;
   heroSection: {
@@ -747,6 +653,11 @@ export type WebsiteSectionsQueryResult = {
   } | null;
   projectSection: {
     pretitle?: string;
+    text?: string;
+  } | null;
+  projectsPageSection: {
+    pretitle?: string;
+    title?: string;
     text?: string;
   } | null;
   missionSection: {
@@ -767,5 +678,33 @@ export type WebsiteSectionsQueryResult = {
     schedules?: string;
     phone?: string;
     email?: string;
+  } | null;
+} | null;
+// Variable: legalMattersQuery
+// Query: *[_type == "legalMatters"] | order(_updatedAt desc)[0] {  _id,  associationInfo,  technicalInfo,  dataProtectionAuthority,  legalReferences}
+export type LegalMattersQueryResult = {
+  _id: string;
+  associationInfo: {
+    associationName?: string;
+    legalRepresentative?: string;
+    address?: {
+      street?: string;
+      city?: string;
+      country?: string;
+    };
+    contactEmail?: string;
+    contactPhone?: string;
+  } | null;
+  technicalInfo: {
+    hostingProvider?: string;
+    lastUpdated?: string;
+  } | null;
+  dataProtectionAuthority: {
+    authorityName?: string;
+    authorityWebsite?: string;
+  } | null;
+  legalReferences: {
+    rgpdReference?: string;
+    togoleseLawReference?: string;
   } | null;
 } | null;

@@ -1,0 +1,40 @@
+{
+  "id": "fallback-els-togo-settings",
+  "title": "ELS TOGO",
+  "description": [
+    {
+      "_type": "block",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Une association togolaise basée à Tsévié, dédiée à la promotion de l'éducation, des loisirs et de la santé au Togo."
+        }
+      ]
+    }
+  ],
+  "footer": [
+    {
+      "_type": "block",
+      "children": [
+        {
+          "_type": "span",
+          "text": "© 2024 ELS TOGO - Tous droits réservés"
+        }
+      ]
+    }
+  ],
+  "ogImage": {
+    "asset": {
+      "_id": "image-fallback",
+      "url": "/opengraph-image.jpg",
+      "metadata": {
+        "dimensions": {
+          "width": 1200,
+          "height": 630
+        }
+      }
+    },
+    "alt": "ELS TOGO - Association togolaise",
+    "metadataBase": "https://www.els-togo.org"
+  }
+}

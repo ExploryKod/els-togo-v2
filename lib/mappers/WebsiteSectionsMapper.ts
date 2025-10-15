@@ -13,6 +13,7 @@ export class WebsiteSectionsMapper {
       id: sanitySections._id || sanitySections.id || 'website-sections',
       heroSection: sanitySections.heroSection ? [sanitySections.heroSection] : [],
       projectSection: sanitySections.projectSection ? [sanitySections.projectSection] : [],
+      projectsPageSection: sanitySections.projectsPageSection ? [sanitySections.projectsPageSection] : [],
       missionSection: sanitySections.missionSection ? [sanitySections.missionSection] : [],
       teamSection: sanitySections.teamSection ? [sanitySections.teamSection] : [],
       contactSection: sanitySections.contactSection ? [sanitySections.contactSection] : [],
@@ -28,6 +29,7 @@ export class WebsiteSectionsMapper {
       id: jsonSections.id || 'website-sections',
       heroSection: jsonSections.heroSection || jsonSections.intro || [],
       projectSection: jsonSections.projectSection || jsonSections.project || [],
+      projectsPageSection: jsonSections.projectsPageSection || jsonSections.projectsPage || [],
       missionSection: jsonSections.missionSection || jsonSections.mission || [],
       teamSection: jsonSections.teamSection || jsonSections.members || [],
       contactSection: jsonSections.contactSection || jsonSections.contact || [],
@@ -71,6 +73,13 @@ export class WebsiteSectionsMapper {
         {
           pretitle: 'Nos projets',
           text: 'Découvrez nos projets communautaires axés sur l\'autonomisation, l\'éducation et l\'environnement.',
+        },
+      ],
+      projectsPageSection: [
+        {
+          pretitle: 'Découvrez',
+          title: 'Tous nos projets',
+          text: 'Explorez l\'ensemble de nos projets communautaires et découvrez comment nous œuvrons pour l\'autonomisation, l\'éducation et l\'environnement.',
         },
       ],
       missionSection: [

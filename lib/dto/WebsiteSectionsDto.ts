@@ -19,6 +19,7 @@ export interface WebsiteSectionsDto {
   id: string;
   heroSection: SectionText[];
   projectSection: SectionText[];
+  projectsPageSection: SectionText[];
   missionSection: SectionText[];
   teamSection: SectionText[];
   contactSection: SectionText[];

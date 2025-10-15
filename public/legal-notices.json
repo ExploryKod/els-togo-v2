@@ -1,0 +1,39 @@
+{
+  "id": "fallback-legal-notices",
+  "siteInfo": {
+    "siteUrl": "https://www.els-togo.org",
+    "siteDescription": "Site web de l'Association ELS - Togo pour la promotion de l'éducation, des loisirs et de la santé au Togo"
+  },
+  "organizationInfo": {
+    "organizationName": "Association ELS - Togo",
+    "legalForm": "Association",
+    "capital": "",
+    "registrationNumber": "",
+    "registrationOffice": "",
+    "address": {
+      "street": "Lomé, Togo",
+      "city": "Lomé",
+      "country": "Togo"
+    },
+    "contactPhone": "+228 90 12 34 56"
+  },
+  "publicationDirector": {
+    "name": "Kokou Jacques Kpeglo Bessou",
+    "position": "Président du Conseil d'Administration"
+  },
+  "hostingInfo": {
+    "providerName": "Vercel Inc.",
+    "providerAddress": {
+      "street": "340 S Lemon Ave #4133",
+      "city": "Walnut, CA 91789",
+      "country": "États-Unis"
+    },
+    "providerPhone": "(559) 288-7060",
+    "providerWebsite": "https://vercel.com/"
+  },
+  "disclaimers": {
+    "contentDisclaimer": "Le contenu de ce site est édité sous réserve d'erreurs techniques et/ou typographiques. L'Association ELS - Togo ne saurait donc être tenue responsable quant à l'exactitude des informations mises à disposition des utilisateurs.",
+    "copyrightNotice": "Tous les droits de reproduction sont réservés, y compris pour les documents iconographiques et photographiques.",
+    "liabilityDisclaimer": "L'Association ELS - Togo ne peut garantir que le fonctionnement du site sera exempt d'interruptions ou d'erreurs. La responsabilité de l'association ne saurait être engagée pour les dommages résultant de l'utilisation du site."
+  }
+}

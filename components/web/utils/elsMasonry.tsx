@@ -1,7 +1,6 @@
 import React from 'react';
 import Image from 'next/image'; 
 import Link from 'next/link';
-import { MyButton } from '@/components/Button';
 import { ProjectDto, MasonryProjectDto } from '@/lib/dto/ProjectDto';
 import { ProjectMapper } from '@/lib/mappers/ProjectMapper';
 
@@ -64,9 +63,9 @@ function ElsMasonry({projects}:MasonryProps) {
                 
                 {/* Button */}
                 <div className="mt-auto">
-                  <MyButton className={`w-full bg-${masonryProject.colorClass}-600 hover:bg-${masonryProject.colorClass}-700 text-white font-medium py-2 px-4 rounded-lg transition-all duration-300 transform group-hover:scale-105`}>
+                  <span className="button button--secondary button--small w-full text-center block">
                     Découvrir
-                  </MyButton>
+                  </span>
                 </div>
               </div>
             </div>

@@ -27,9 +27,9 @@ const Team: React.FC<TeamProps> = ({ sections, members }) => {
                   <div className="pre-title pre-title--centered">
                     {sectionText.pretitle || 'Notre équipe'}
                   </div>
-                  <p className="mx-auto text-center">
+                  <h2 className="mx-auto text-center">
                     {sectionText.title || 'Une équipe engagée pour rendre le monde meilleur'}
-                  </p>
+                  </h2>
                   <p className="text-center">{sectionText.text || ''}</p>
                 </div>
               ))}

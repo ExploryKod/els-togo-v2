@@ -5,6 +5,7 @@ import { ProjectSection } from "@/components/web/sections/project";
 import Team from "@/components/web/sections/team";
 import ElsMasonry from "@/components/web/utils/elsMasonry";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import { PROJECTS } from "./front-project";
 import { MissionCardDto } from "@/lib/dto/MissionCardDto";
 import { WebsiteSectionsDto } from "@/lib/dto/WebsiteSectionsDto";
@@ -176,7 +177,15 @@ const websiteSections: WebsiteSectionsDto = await getWebsiteSectionsData();
     <Mission sections={sections} cards={cards} missionCards={missionCards} />
     {projects && projects.length > 0 ? (
          <ProjectSection sections={sections}>
-          <ElsMasonry projects={projects} />
+          <ElsMasonry projects={projects.slice(0, 6)} />
+          <div className="text-center mt-8">
+            <Link 
+              href="/projects" 
+              className="button"
+            >
+              Voir tous nos projets
+            </Link>
+          </div>
         </ProjectSection>
     ) : null}
     {members && members.length > 0 ? (<Team sections={sections} members={members} />) : null}

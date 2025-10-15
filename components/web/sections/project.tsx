@@ -18,10 +18,19 @@ export const ProjectSection = ({sections, children}:ProjectProps) => {
     return(
         <section id="nos-projets" className="relative flex flex-col justify-center bg-slate-50 min-h-screen overflow-hidden">
         <div className="mx-auto px-4 md:px-6 py-20 w-full max-w-7xl">
-          <h2 className="mb-2 font-bold text-3xl text-center">{sections.project[0].pretitle || 'Nos projets' }</h2>
-          <p className="mb-4 text-center text-lg">
-           {sections.project[0].text}
-          </p>
+          {(() => {
+            const first = sections?.project?.[0];
+            const pretitle = first?.pretitle || 'Nos projets';
+            const text = first?.text || '';
+            return (
+              <>
+                <h1 className="mb-2 font-bold text-3xl text-left">{pretitle}</h1>
+                {text ? (
+                  <p className="mb-4 text-left text-lg">{text}</p>
+                ) : null}
+              </>
+            );
+          })()}
           {children}
           </div>
           </section>

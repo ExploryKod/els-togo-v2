@@ -25,11 +25,11 @@ export default defineConfig({
   plugins: [
     structureTool({ 
       structure: pageStructure(elsTogoSchemas.filter(schema => 
-        schema.name === 'elsTogoSettings' || schema.name === 'websiteSections'
+        schema.name === 'elsTogoSettings' || schema.name === 'websiteSections' || schema.name === 'legalMatters' || schema.name === 'legalNotices'
       )) 
     }),
     singletonPlugin(elsTogoSchemas.filter(schema => 
-      schema.name === 'elsTogoSettings' || schema.name === 'websiteSections'
+      schema.name === 'elsTogoSettings' || schema.name === 'websiteSections' || schema.name === 'legalMatters' || schema.name === 'legalNotices'
     ).map(schema => schema.name)),
     unsplashImageAsset(),
     assistWithPresets(),

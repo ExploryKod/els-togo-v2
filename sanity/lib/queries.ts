@@ -1,6 +1,25 @@
 import { groq } from "next-sanity";
 
-export const settingsQuery = groq`*[_type == "elsTogoSettings"][0]`;
+export const settingsQuery = groq`*[_type == "elsTogoSettings"][0] {
+  _id,
+  title,
+  description,
+  footer,
+  ogImage {
+    asset->{
+      _id,
+      url,
+      metadata {
+        dimensions {
+          width,
+          height
+        }
+      }
+    },
+    alt,
+    metadataBase
+  }
+}`;
 
 // Els Togo specific queries
 export const projectsQuery = groq`*[_type == "project"] | order(_createdAt desc) {
@@ -24,13 +43,7 @@ export const projectsQuery = groq`*[_type == "project"] | order(_createdAt desc)
   "slug": slug.current
 }`;
 
-export const sectionsQuery = groq`*[_type == "section"] | order(order asc) {
-  _id,
-  sectionTitle,
-  sectionText,
-  sectionImage,
-  "sectionOrder": order
-}`;
+// sectionsQuery removed: legacy 'section' document no longer used
 
 export const membersQuery = groq`*[_type == "member"] | order(_createdAt desc) {
   _id,
@@ -44,14 +57,7 @@ export const membersQuery = groq`*[_type == "member"] | order(_createdAt desc) {
   socialLinks
 }`;
 
-export const cardContentQuery = groq`*[_type == "cardContent"] | order(_createdAt desc) {
-  _id,
-  cardTitle,
-  cardDescription,
-  cardImage,
-  cardCategory,
-  cardLink
-}`;
+// cardContentQuery removed: legacy 'cardContent' document no longer used
 
 export const categoriesQuery = groq`*[_type == "category"] | order(title asc) {
   _id,
@@ -72,8 +78,17 @@ export const websiteSectionsQuery = groq`*[_type == "websiteSections"] | order(_
   _id,
   heroSection,
   projectSection,
+  projectsPageSection,
   missionSection,
   teamSection,
   contactSection,
   contactInfo
+}`;
+
+export const legalMattersQuery = groq`*[_type == "legalMatters"] | order(_updatedAt desc)[0] {
+  _id,
+  associationInfo,
+  technicalInfo,
+  dataProtectionAuthority,
+  legalReferences
 }`;
