@@ -24,6 +24,13 @@ export async function GET(req: NextRequest) {
             },
             membersCount: members.length,
             members: members.slice(0, 3), // Show first 3 members for debugging
+            memberSample: members.length > 0 ? {
+                id: members[0].id,
+                name: members[0].name,
+                role: members[0].role,
+                hasImage: !!members[0].memberImage?.src,
+                imageSrc: members[0].memberImage?.src
+            } : null,
             timestamp: new Date().toISOString()
         });
     } catch (error) {
