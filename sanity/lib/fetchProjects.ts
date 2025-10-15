@@ -12,7 +12,12 @@ export interface SanityProject {
   results?: string;
   date?: string;
   place?: string;
-  category?: string;
+  category?: {
+    _id: string;
+    title: string;
+    description?: string;
+    color?: string;
+  };
   projectImg?: {
     asset?: {
       _ref: string;

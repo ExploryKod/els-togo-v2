@@ -160,6 +160,7 @@ export type Member = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  firstname?: string;
   name?: string;
   role?: string;
   bio?: string;
@@ -240,7 +241,12 @@ export type Project = {
   results?: string;
   date?: string;
   place?: string;
-  category?: string;
+  category?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "category";
+  };
   projectImg?: {
     asset?: {
       _ref: string;
@@ -317,6 +323,17 @@ export type SanityImageMetadata = {
   blurHash?: string;
   hasAlpha?: boolean;
   isOpaque?: boolean;
+};
+
+export type Category = {
+  _id: string;
+  _type: "category";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  description?: string;
+  color?: string;
 };
 
 export type SanityAssistInstructionTask = {
@@ -501,7 +518,7 @@ export type SettingsQueryResult = {
   };
 } | null;
 // Variable: projectsQuery
-// Query: *[_type == "project"] | order(_createdAt desc) {  _id,  id,  title,  accroche,  description,  goal,  howWeDo,  results,  date,  place,  category,  projectImg,  "slug": slug.current}
+// Query: *[_type == "project"] | order(_createdAt desc) {  _id,  id,  title,  accroche,  description,  goal,  howWeDo,  results,  date,  place,  category->{    _id,    title,    description,    color  },  projectImg,  "slug": slug.current}
 export type ProjectsQueryResult = Array<{
   _id: string;
   id: string | null;
@@ -513,7 +530,12 @@ export type ProjectsQueryResult = Array<{
   results: string | null;
   date: string | null;
   place: string | null;
-  category: string | null;
+  category: {
+    _id: string;
+    title: string | null;
+    description: string | null;
+    color: string | null;
+  } | null;
   projectImg: {
     asset?: {
       _ref: string;
@@ -566,9 +588,10 @@ export type SectionsQueryResult = Array<{
   sectionOrder: number | null;
 }>;
 // Variable: membersQuery
-// Query: *[_type == "member"] | order(_createdAt desc) {  _id,  name,  role,  bio,  memberImage,  email,  phone,  socialLinks}
+// Query: *[_type == "member"] | order(_createdAt desc) {  _id,  firstname,  name,  role,  bio,  memberImage,  email,  phone,  socialLinks}
 export type MembersQueryResult = Array<{
   _id: string;
+  firstname: string | null;
   name: string | null;
   role: string | null;
   bio: string | null;
@@ -617,4 +640,12 @@ export type CardContentQueryResult = Array<{
     text?: string;
     openInNewTab?: boolean;
   } | null;
+}>;
+// Variable: categoriesQuery
+// Query: *[_type == "category"] | order(title asc) {  _id,  title,  description,  color}
+export type CategoriesQueryResult = Array<{
+  _id: string;
+  title: string | null;
+  description: string | null;
+  color: string | null;
 }>;

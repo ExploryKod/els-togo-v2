@@ -8,16 +8,67 @@ import dynamic from "next/dynamic";
 import { PROJECTS } from "./front-project"
 
 async function getProjectData() {
-  const SERVER_PATH = process.env.NEXT_PUBLIC_MOD !== 'production' ? process.env.ROOT_DEV : process.env.ROOT_PATH
-  const res = await fetch(SERVER_PATH + '/api/projects')
-  // The return value is *not* serialized
- 
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error('Failed to fetch data')
+  try {
+    const SERVER_PATH = process.env.NEXT_PUBLIC_MOD !== 'production' ? process.env.ROOT_DEV : process.env.ROOT_PATH
+    const res = await fetch(SERVER_PATH + '/api/projects', {
+      // Add cache control to prevent stale data
+      cache: 'no-store',
+      // Add timeout to prevent hanging requests
+      signal: AbortSignal.timeout(10000) // 10 second timeout
+    })
+    
+    if (!res.ok) {
+      console.error('API request failed with status:', res.status, res.statusText);
+      // Return fallback data instead of throwing
+      return PROJECTS; // Use the fallback data
+    }
+    
+    const data = await res.json();
+    
+    // Check if the response contains an error
+    if (data.error) {
+      console.error('API returned error:', data.error, data.details);
+      return PROJECTS; // Use the fallback data
+    }
+    
+    return data;
+  } catch (error) {
+    console.error('Error fetching project data:', error);
+    // Return fallback data instead of throwing
+    return PROJECTS; // Use the fallback data
   }
- 
-  return res.json()
+}
+
+async function getMemberData() {
+  try {
+    const SERVER_PATH = process.env.NEXT_PUBLIC_MOD !== 'production' ? process.env.ROOT_DEV : process.env.ROOT_PATH
+    const res = await fetch(SERVER_PATH + '/api/members', {
+      // Add cache control to prevent stale data
+      cache: 'no-store',
+      // Add timeout to prevent hanging requests
+      signal: AbortSignal.timeout(10000) // 10 second timeout
+    })
+    
+    if (!res.ok) {
+      console.error('Member API request failed with status:', res.status, res.statusText);
+      // Return empty array instead of throwing
+      return [];
+    }
+    
+    const data = await res.json();
+    
+    // Check if the response contains an error
+    if (data.error) {
+      console.error('Member API returned error:', data.error, data.details);
+      return []; // Return empty array
+    }
+    
+    return data;
+  } catch (error) {
+    console.error('Error fetching member data:', error);
+    // Return empty array instead of throwing
+    return [];
+  }
 }
 
 
@@ -35,6 +86,7 @@ const DATA = [
 
 
 const projects:any = await getProjectData() || PROJECTS;
+const members:any = await getMemberData() || [];
   // const file = await fs.readFile(process.cwd() + '/public/front-projects.json', 'utf8');
   // const projects = JSON.parse(file);
   // console.log(process.cwd());
@@ -114,36 +166,6 @@ console.log(projects);
     ],
   };
 
-  const members = [
-    {
-      nom: 'Kpeglo Bessou',
-      prenom: 'Kokou Jacques',
-      img: { src: '/assets/img/persons/persons-man.jpg', alt: 'personne' },
-      email: 'email@mail.com',
-      role: "Président du Conseil d'Administration",
-    },
-    {
-      nom: 'Azanli',
-      prenom: 'Koffi Djifa',
-      img: { src: '/assets/img/persons/persons-man.jpg', alt: 'personne' },
-      email: 'email@mail.com',
-      role: 'Directeur exécutif',
-    },
-    {
-      nom: 'Dewa Kassa',
-      prenom: 'Kodjo Akonta Florent',
-      img: { src: '/assets/img/persons/persons-man.jpg', alt: 'personne' },
-      email: 'email@mail.com',
-      role: 'Responsable planification et suivi',
-    },
-    {
-      nom: 'Tate',
-      prenom: 'Yawo Akponi',
-      img: { src: '/assets/img/persons/persons-man.jpg', alt: 'personne' },
-      email: 'email@mail.com',
-      role: "Coordonnateur de l'association",
-    },
-  ];
 
 
   return (

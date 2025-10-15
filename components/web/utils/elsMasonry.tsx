@@ -12,18 +12,20 @@ interface MasonryProps {
 
 function ElsMasonry({projects}:MasonryProps) {
   return (
-        <div className="gap-4 grid sm:grid-cols-2 lg:grid-cols-3 grid-col-1">
-    {[1, 2, 3].map((colNumber) => (
-      <div key={colNumber} className="gap-4 grid">
-        {projects?.filter((_, index:number) => (index % 3) + 1 === colNumber)
-          .map((project:ProjectDto, index:number) => {
-            const masonryProject = ProjectMapper.toMasonry(project, index);
-            return (
-            <Link className="no-underline hover:!no-underline cursor-pointer" key={masonryProject.id} href={`/project/${masonryProject.slug}`} >
-            <div className="relative flex flex-col gap-3 group">
-              <div className="relative overflow-hidden rounded-xl" style={{ height: `${masonryProject.height}px` }}>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {projects?.map((project:ProjectDto, index:number) => {
+        const masonryProject = ProjectMapper.toMasonry(project, index);
+        return (
+          <Link 
+            className="no-underline hover:!no-underline cursor-pointer group" 
+            key={masonryProject.id} 
+            href={`/project/${masonryProject.slug}`}
+          >
+            <div className="relative flex flex-col h-full bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group-hover:scale-105">
+              {/* Image Container */}
+              <div className="relative h-64 w-full overflow-hidden">
                 <Image
-                  className={`group-hover:scale-105 masonry-img shadow rounded-xl`}
+                  className="group-hover:scale-110 transition-transform duration-300"
                   src={
                     masonryProject.projectImg && masonryProject.projectImg.trim() !== "" && masonryProject.projectImg !== 'placeholder'
                       ? masonryProject.projectImg
@@ -34,28 +36,44 @@ function ElsMasonry({projects}:MasonryProps) {
                   alt={`Image ${masonryProject.title || 'Project'}`}
                   style={{ objectFit: 'cover' }}
                 />
+                {/* Overlay gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
-              <div className={`p-4 group/inner rounded-xl grow opacity-100 bg-${masonryProject.colorClass}-50 border border-${masonryProject.colorClass}-200`}>
-                <div className="group-hover:opacity-50">
-                  <div className="flex justify-between gap-2">
-                    <p className={`text-${masonryProject.colorClass}-600`}>{masonryProject.date}</p>
-                    <p className={`text-${masonryProject.colorClass}-600`}>{masonryProject.place}</p>
-                  </div>
-                  <h3 className={`mb-2 font-bold text-lg group-hover:!no-underline text-${masonryProject.colorClass}-800`}>{masonryProject.title}</h3>
               
-                  <p className={`mt-4 text-${masonryProject.colorClass}-700`}>
-                    {masonryProject.displayText}
-                  </p>
+              {/* Content Container */}
+              <div className={`p-6 flex flex-col flex-grow bg-${masonryProject.colorClass}-50 border-t-4 border-${masonryProject.colorClass}-200`}>
+                {/* Date and Place */}
+                <div className="flex justify-between gap-2 mb-3">
+                  <span className={`text-sm font-medium text-${masonryProject.colorClass}-600 bg-${masonryProject.colorClass}-100 px-2 py-1 rounded-full`}>
+                    {masonryProject.date}
+                  </span>
+                  <span className={`text-sm font-medium text-${masonryProject.colorClass}-600 bg-${masonryProject.colorClass}-100 px-2 py-1 rounded-full`}>
+                    {masonryProject.place}
+                  </span>
                 </div>
-                <MyButton className='w-full z-10 opacity-0 event-none group-hover:opacity-100'>Découvrir</MyButton>
+                
+                {/* Title */}
+                <h3 className={`text-xl font-bold text-${masonryProject.colorClass}-800 mb-3 group-hover:text-${masonryProject.colorClass}-900 transition-colors duration-300`}>
+                  {masonryProject.title}
+                </h3>
+                
+                {/* Description */}
+                <p className={`text-${masonryProject.colorClass}-700 text-sm leading-relaxed mb-4 flex-grow`}>
+                  {masonryProject.displayText}
+                </p>
+                
+                {/* Button */}
+                <div className="mt-auto">
+                  <MyButton className={`w-full bg-${masonryProject.colorClass}-600 hover:bg-${masonryProject.colorClass}-700 text-white font-medium py-2 px-4 rounded-lg transition-all duration-300 transform group-hover:scale-105`}>
+                    Découvrir
+                  </MyButton>
+                </div>
               </div>
             </div>
-            </Link>
-            );
-          })}
-      </div>
-    ))}
-  </div>
+          </Link>
+        );
+      })}
+    </div>
   );
 };
 

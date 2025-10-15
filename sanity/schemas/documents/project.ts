@@ -69,8 +69,10 @@ export default defineType({
     defineField({
       name: "category",
       title: "Category",
-      type: "string",
-      description: "Project category",
+      type: "reference",
+      to: [{ type: "category" }],
+      description: "Select a project category from the list",
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "projectImg",
@@ -106,7 +108,7 @@ export default defineType({
   preview: {
     select: {
       title: "title",
-      subtitle: "category",
+      subtitle: "category.title",
       media: "projectImg",
     },
   },

@@ -20,8 +20,8 @@ export class ProjectMapper {
       results: sanityProject.results || '',
       date: sanityProject.date || '',
       place: sanityProject.place || '',
-      category: sanityProject.category || '',
-      projectImg: this.getSanityImageUrl(sanityProject.projectImg) || '',
+      category: sanityProject.category?.title || '',
+      projectImg: ProjectMapper.getSanityImageUrl(sanityProject.projectImg) || '',
     };
   }
 

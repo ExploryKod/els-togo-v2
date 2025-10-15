@@ -8,8 +8,14 @@ export default defineType({
   type: "document",
   fields: [
     defineField({
+      name: "firstname",
+      title: "First Name",
+      type: "string",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: "name",
-      title: "Full Name",
+      title: "Last Name",
       type: "string",
       validation: (rule) => rule.required(),
     }),

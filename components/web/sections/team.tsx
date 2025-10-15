@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import { MemberDto, TeamMemberDto } from '@/lib/dto/MemberDto';
+import { MemberMapper } from '@/lib/mappers/MemberMapper';
 
 interface SectionText {
   pretitle?: string;
@@ -6,22 +8,11 @@ interface SectionText {
   text?: string;
 }
 
-interface Member {
-  nom: string;
-  prenom: string;
-  img: {
-    src: string;
-    alt: string;
-  };
-  email: string;
-  role: string;
-}
-
 interface TeamProps {
   sections: {
     members: SectionText[];
   };
-  members: Member[];
+  members: MemberDto[];
 }
 
 const Team: React.FC<TeamProps> = ({ sections, members }) => {
@@ -46,25 +37,28 @@ const Team: React.FC<TeamProps> = ({ sections, members }) => {
 
           <div className="text-cards-horizon__cardsWrapper col-12">
             {members.length > 0 &&
-              members.map((member, index) => (
+              members.map((member, index) => {
+                const teamMember = MemberMapper.toTeamMember(member);
+                return (
                 <div key={index} data-typebtn="team-btn" className="box modal-open-btn">
                   <div className="top-bar"></div>
                   <div className="content">
                     <Image
-                      src={member.img.src || '/assets/img/default.jpg'}
-                      alt={member.img.alt || `${member.prenom} ${member.nom}`}
+                      src={teamMember.memberImage.src}
+                      alt={teamMember.memberImage.alt}
                       width={150}
-                      height={150} // Adjust dimensions as needed
+                      height={150}
+                      priority={index < 3} // Priority for first 3 members
                     />
-                    <strong>{member.prenom}</strong>
-                    <p>{member.nom}</p>
-                    <p>{member.email}</p>
+                    <strong>{teamMember.displayName}</strong>
+                    <p>{teamMember.email}</p>
                   </div>
                   <div className="box-footer">
-                    <p>{member.role}</p>
+                    <p>{teamMember.role}</p>
                   </div>
                 </div>
-              ))}
+                );
+              })}
           </div>
         </div>
       </div>

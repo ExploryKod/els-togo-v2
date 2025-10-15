@@ -3,6 +3,7 @@ import project from "./documents/project";
 import section from "./documents/section";
 import member from "./documents/member";
 import cardContent from "./documents/cardContent";
+import category from "./documents/category";
 
 // Import all singleton schemas
 import elsTogoSettings from "./singletons/elsTogoSettings";
@@ -14,6 +15,7 @@ export const elsTogoSchemas = [
   section,
   member,
   cardContent,
+  category,
   
   // Singleton schemas
   elsTogoSettings,

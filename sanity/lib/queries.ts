@@ -14,7 +14,12 @@ export const projectsQuery = groq`*[_type == "project"] | order(_createdAt desc)
   results,
   date,
   place,
-  category,
+  category->{
+    _id,
+    title,
+    description,
+    color
+  },
   projectImg,
   "slug": slug.current
 }`;
@@ -29,6 +34,7 @@ export const sectionsQuery = groq`*[_type == "section"] | order(order asc) {
 
 export const membersQuery = groq`*[_type == "member"] | order(_createdAt desc) {
   _id,
+  firstname,
   name,
   role,
   bio,
@@ -45,4 +51,11 @@ export const cardContentQuery = groq`*[_type == "cardContent"] | order(_createdA
   cardImage,
   cardCategory,
   cardLink
+}`;
+
+export const categoriesQuery = groq`*[_type == "category"] | order(title asc) {
+  _id,
+  title,
+  description,
+  color
 }`;
