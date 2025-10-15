@@ -12,8 +12,6 @@ export async function GET(req: NextRequest) {
         revalidatePath('/api/projects/details');
         return NextResponse.json(projects);
     } catch(error) {
-        console.error("Error fetching projects:", error);
-        
         // Instead of returning 500, return empty array to prevent frontend errors
         return NextResponse.json([]);
     }

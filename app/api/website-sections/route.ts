@@ -5,12 +5,9 @@ import { WebsiteSectionsDataSourceFactory } from "@/lib/dataSources/websiteSecti
 export const dynamic = 'force-dynamic' // defaults to auto
 
 export async function GET(req: NextRequest) {
-    console.log('🔧 API /api/website-sections - Starting...');
     try {
         // Fetch website sections using flexible data source
         const sections = await WebsiteSectionsDataSourceFactory.fetchWebsiteSections();
-
-        console.log('🔧 API /api/website-sections - Fetched sections:', sections);
         revalidatePath('/api/website-sections');
         return NextResponse.json({
             ...sections,
@@ -20,7 +17,6 @@ export async function GET(req: NextRequest) {
             }
         });
     } catch(error) {
-        console.log("Error fetching website sections, using fallback:", error);
         // Return fallback data instead of empty response
         const { WebsiteSectionsMapper } = await import("@/lib/mappers/WebsiteSectionsMapper");
         const fallbackSections = WebsiteSectionsMapper.createFallback();

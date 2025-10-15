@@ -72,7 +72,6 @@ export default function DragAndDropForm() {
                 showToast('error', `${result.message}`)
             }
         } catch (error) {
-            console.error("Error uploading file:", error);
             showToast('error', `Une erreur est survenu lors du transfert: ${error}`)
         }
     }

@@ -17,7 +17,6 @@ class SanityProjectDataSource implements ProjectDataSource {
       const projects = await fetchSanityProjects();
       return projects.map(ProjectMapper.fromSanity);
     } catch (error) {
-      console.error('Error fetching projects from Sanity:', error);
       throw error;
     }
   }
@@ -27,7 +26,6 @@ class SanityProjectDataSource implements ProjectDataSource {
       const projects = await this.fetchProjects();
       return projects.find(p => p.slug === slug) || null;
     } catch (error) {
-      console.error('Error fetching project by slug from Sanity:', error);
       throw error;
     }
   }
@@ -41,10 +39,8 @@ class SupabaseProjectDataSource implements ProjectDataSource {
       // return this.transformSupabaseProjects(data);
       
       // For now, return empty array as placeholder
-      console.log('Supabase data source not implemented yet');
       return [];
     } catch (error) {
-      console.error('Error fetching projects from Supabase:', error);
       throw error;
     }
   }
@@ -54,7 +50,6 @@ class SupabaseProjectDataSource implements ProjectDataSource {
       const projects = await this.fetchProjects();
       return projects.find(p => p.slug === slug) || null;
     } catch (error) {
-      console.error('Error fetching project by slug from Supabase:', error);
       throw error;
     }
   }
@@ -74,7 +69,6 @@ class JsonProjectDataSource implements ProjectDataSource {
       const projects = await response.json();
       return projects.map(ProjectMapper.fromJson);
     } catch (error) {
-      console.error('Error fetching projects from JSON:', error);
       throw error;
     }
   }
@@ -84,7 +78,6 @@ class JsonProjectDataSource implements ProjectDataSource {
       const projects = await this.fetchProjects();
       return projects.find(p => p.slug === slug) || null;
     } catch (error) {
-      console.error('Error fetching project by slug from JSON:', error);
       throw error;
     }
   }
@@ -114,7 +107,6 @@ export class ProjectDataSourceFactory {
       
       return projects;
     } catch (error) {
-      console.error(`Error with data source (${config.source}):`, error);
       throw error;
     }
   }
@@ -126,7 +118,6 @@ export class ProjectDataSourceFactory {
       const source = this.create(config.source);
       return await source.fetchProjectBySlug(slug);
     } catch (error) {
-      console.error(`Error with data source (${config.source}):`, error);
       throw error;
     }
   }

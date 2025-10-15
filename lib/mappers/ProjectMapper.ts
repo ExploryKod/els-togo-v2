@@ -110,7 +110,6 @@ export class ProjectMapper {
       
       return `https://cdn.sanity.io/images/${projectId}/${dataset}/${imageId}.${extension}`;
     } catch (error) {
-      console.error('Error generating Sanity image URL:', error);
       return '';
     }
   }

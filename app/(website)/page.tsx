@@ -20,7 +20,6 @@ async function getProjectData() {
     })
     
     if (!res.ok) {
-      console.error('API request failed with status:', res.status, res.statusText);
       // Return fallback data instead of throwing
       return PROJECTS; // Use the fallback data
     }
@@ -29,13 +28,11 @@ async function getProjectData() {
     
     // Check if the response contains an error
     if (data.error) {
-      console.error('API returned error:', data.error, data.details);
       return PROJECTS; // Use the fallback data
     }
     
     return data;
   } catch (error) {
-    console.error('Error fetching project data:', error);
     // Return fallback data instead of throwing
     return PROJECTS; // Use the fallback data
   }
@@ -52,7 +49,6 @@ async function getMemberData() {
     })
     
     if (!res.ok) {
-      console.error('Member API request failed with status:', res.status, res.statusText);
       // Return empty array instead of throwing
       return [];
     }
@@ -61,13 +57,11 @@ async function getMemberData() {
     
     // Check if the response contains an error
     if (data.error) {
-      console.error('Member API returned error:', data.error, data.details);
       return []; // Return empty array
     }
     
     return data;
   } catch (error) {
-    console.error('Error fetching member data:', error);
     // Return empty array instead of throwing
     return [];
   }
@@ -84,7 +78,6 @@ async function getMissionCardData() {
     })
     
     if (!res.ok) {
-      console.error('Mission cards API request failed with status:', res.status, res.statusText);
       // Return empty array instead of throwing
       return [];
     }
@@ -93,25 +86,20 @@ async function getMissionCardData() {
     
     // Check if the response contains an error
     if (data.error) {
-      console.error('Mission cards API returned error:', data.error, data.details);
       return []; // Return empty array
     }
     
     return data;
   } catch (error) {
-    console.error('Error fetching mission cards data:', error);
     // Return empty array instead of throwing
     return [];
   }
 }
 
 async function getWebsiteSectionsData() {
-  console.log('🔧 getWebsiteSectionsData - Starting...');
   try {
     const SERVER_PATH = process.env.NEXT_PUBLIC_MOD !== 'production' ? process.env.ROOT_DEV : process.env.ROOT_PATH
-    console.log('🔧 getWebsiteSectionsData - SERVER_PATH:', SERVER_PATH);
     const url = SERVER_PATH + '/api/website-sections?t=' + Date.now();
-    console.log('🔧 getWebsiteSectionsData - URL:', url);
     
     const res = await fetch(url, {
       // Add cache control to prevent stale data
@@ -120,28 +108,22 @@ async function getWebsiteSectionsData() {
       signal: AbortSignal.timeout(10000) // 10 second timeout
     })
     
-    console.log('🔧 getWebsiteSectionsData - Response status:', res.status);
-    
     if (!res.ok) {
-      console.error('Website sections API request failed with status:', res.status, res.statusText);
       // Return fallback data instead of throwing
       const { WebsiteSectionsMapper } = await import("@/lib/mappers/WebsiteSectionsMapper");
       return WebsiteSectionsMapper.createFallback();
     }
     
     const data = await res.json();
-    console.log('🔧 getWebsiteSectionsData - Response data:', data);
     
     // Check if the response contains an error
     if (data.error) {
-      console.error('Website sections API returned error:', data.error, data.details);
       const { WebsiteSectionsMapper } = await import("@/lib/mappers/WebsiteSectionsMapper");
       return WebsiteSectionsMapper.createFallback();
     }
     
     return data;
   } catch (error) {
-    console.error('Error fetching website sections data:', error);
     // Return fallback data instead of throwing
     const { WebsiteSectionsMapper } = await import("@/lib/mappers/WebsiteSectionsMapper");
     return WebsiteSectionsMapper.createFallback();
@@ -168,7 +150,6 @@ const missionCards: MissionCardDto[] = await getMissionCardData() || [];
 const websiteSections: WebsiteSectionsDto = await getWebsiteSectionsData();
   // const file = await fs.readFile(process.cwd() + '/public/front-projects.json', 'utf8');
   // const projects = JSON.parse(file);
-  // console.log(process.cwd());
   
   // Use dynamic sections data from Sanity/API
   const sections = {
@@ -181,15 +162,6 @@ const websiteSections: WebsiteSectionsDto = await getWebsiteSectionsData();
 
   const contacts = websiteSections.contactInfo;
 
-  console.log('🔧 Page - websiteSections:', websiteSections);
-  console.log('🔧 Page - sections:', sections);
-  console.log('🔧 Page - contacts:', contacts);
-  
-  // More detailed debugging
-  console.log('🔧 Page - heroSection:', websiteSections.heroSection);
-  console.log('🔧 Page - missionSection:', websiteSections.missionSection);
-  console.log('🔧 Page - sections.intro:', sections.intro);
-  console.log('🔧 Page - sections.mission:', sections.mission);
 
   // Legacy cards data - now using Sanity data instead
   const cards = {

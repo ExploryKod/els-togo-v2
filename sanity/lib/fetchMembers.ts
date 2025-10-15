@@ -31,7 +31,6 @@ export async function fetchMembers(): Promise<SanityMember[]> {
     const members = await client.fetch(membersQuery);
     return members || [];
   } catch (error) {
-    console.error('Error fetching members from Sanity:', error);
     throw error;
   }
 }

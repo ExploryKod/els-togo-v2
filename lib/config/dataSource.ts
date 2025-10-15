@@ -12,12 +12,7 @@ export interface DataSourceConfig {
 export function getDataSourceConfig(): DataSourceConfig {
   const source = (process.env.NEXT_PUBLIC_DATA_SOURCE as DataSource) || 'sanity';
 
-  console.log('🔧 Data Source Configuration:', {
-    source,
-    env: {
-      NEXT_PUBLIC_DATA_SOURCE: process.env.NEXT_PUBLIC_DATA_SOURCE,
-    }
-  });
+  // Data source configuration loaded
 
   return {
     source,

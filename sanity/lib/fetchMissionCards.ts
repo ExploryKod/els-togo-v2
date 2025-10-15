@@ -22,7 +22,6 @@ export async function fetchMissionCards(): Promise<SanityMissionCard[]> {
     const missionCards = await client.fetch<SanityMissionCard[]>(missionCardsQuery);
     return missionCards || [];
   } catch (error) {
-    console.error('Error fetching mission cards from Sanity:', error);
     return [];
   }
 }

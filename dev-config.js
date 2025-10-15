@@ -25,4 +25,4 @@ SANITY_API_READ_TOKEN=your_sanity_read_token
 // 4. Run your development server with: npm run dev
 // 5. Visual editing will work when you have the correct Sanity environment variables
 
-console.log('Development configuration loaded. Make sure to set up your .env.local file with the variables above.');
+// Development configuration loaded. Make sure to set up your .env.local file with the variables above.

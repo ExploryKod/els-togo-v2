@@ -12,7 +12,6 @@ export async function GET(req: NextRequest) {
         revalidatePath('/api/mission-cards');
         return NextResponse.json(missionCards);
     } catch(error) {
-        console.log("Error fetching mission cards, returning empty array:", error);
         return NextResponse.json([]);
     }
 }

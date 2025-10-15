@@ -12,7 +12,6 @@ export async function GET(req: NextRequest) {
         revalidatePath('/api/members');
         return NextResponse.json(members);
     } catch(error) {
-        console.log("Error fetching members, returning empty array:", error);
         return NextResponse.json([]);
     }
 }

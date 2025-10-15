@@ -16,7 +16,6 @@ async function getProjectData(slug: string): Promise<ProjectDto | null> {
     const project = await ProjectDataSourceFactory.fetchProjectBySlugWithFallback(slug);
     return project;
   } catch (error) {
-    console.error('Error fetching project data:', error);
     return null;
   }
 }
@@ -27,7 +26,6 @@ async function getAllProjects(): Promise<ProjectDto[]> {
     const projects = await ProjectDataSourceFactory.fetchProjectsWithFallback();
     return projects;
   } catch (error) {
-    console.error('Error fetching all projects:', error);
     return [];
   }
 }

@@ -35,7 +35,6 @@ export function getSanityImageUrl(
     
     return url;
   } catch (error) {
-    console.error('Error generating Sanity image URL:', error);
     return "";
   }
 }

@@ -14,12 +14,8 @@ const Header: React.FC = () => {
     // Toggle the menu-opened class on the body
     if (newMenuState) {
       document.body.classList.add('menu-opened');
-      console.log('Menu opened - body classes:', document.body.className);
-      console.log('Menu state:', newMenuState);
     } else {
       document.body.classList.remove('menu-opened');
-      console.log('Menu closed - body classes:', document.body.className);
-      console.log('Menu state:', newMenuState);
     }
   };
 

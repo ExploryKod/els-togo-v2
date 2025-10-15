@@ -39,7 +39,6 @@ export async function GET(req: Request) {
 
     return NextResponse.json(jsonData);
   } catch (error:any) {
-    console.error('Error reading Excel file:', error);
     return NextResponse.json({ error: `Failed to read Excel file: ${error.message}` }, { status: 500 });
   }
 }

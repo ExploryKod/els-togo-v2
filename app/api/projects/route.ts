@@ -25,8 +25,6 @@ export async function GET(req: NextRequest) {
         revalidatePath('/api/projects');
         return NextResponse.json(frontPageProjects);
     } catch(error) {
-        console.error("Error fetching projects:", error);
-        
         // Instead of returning 500, return empty array to prevent frontend errors
         // This allows the page to load with fallback data
         return NextResponse.json([]);

@@ -16,12 +16,10 @@ class SanityMissionCardDataSource implements MissionCardDataSource {
     try {
       const missionCards = await fetchSanityMissionCards();
       if (!missionCards || missionCards.length === 0) {
-        console.log('No mission cards found in Sanity');
         return [];
       }
       return missionCards.map(MissionCardMapper.fromSanity);
     } catch (error) {
-      console.log('Error fetching mission cards from Sanity, returning empty array:', error);
       return [];
     }
   }
@@ -31,7 +29,6 @@ class SanityMissionCardDataSource implements MissionCardDataSource {
       const missionCards = await this.fetchMissionCards();
       return missionCards.find(mc => mc.id === id) || null;
     } catch (error) {
-      console.error('Error fetching mission card by id from Sanity:', error);
       throw error;
     }
   }
@@ -57,18 +54,15 @@ class JsonMissionCardDataSource implements MissionCardDataSource {
       const response = await fetch(`${SERVER_PATH}/mission-cards.json`);
       
       if (!response.ok) {
-        console.log('No mission-cards.json file found, returning empty array');
         return [];
       }
       
       const missionCards = await response.json();
       if (!missionCards || missionCards.length === 0) {
-        console.log('No mission cards found in JSON file');
         return [];
       }
       return missionCards.map(MissionCardMapper.fromJson);
     } catch (error) {
-      console.log('Error fetching mission cards from JSON, returning empty array:', error);
       return [];
     }
   }
@@ -78,7 +72,6 @@ class JsonMissionCardDataSource implements MissionCardDataSource {
       const missionCards = await this.fetchMissionCards();
       return missionCards.find(mc => mc.id === id) || null;
     } catch (error) {
-      console.error('Error fetching mission card by id from JSON:', error);
       throw error;
     }
   }
@@ -107,7 +100,6 @@ export class MissionCardDataSourceFactory {
       
       return missionCards;
     } catch (error) {
-      console.log(`Error with data source (${config.source}), returning empty array:`, error);
       return [];
     }
   }
@@ -119,7 +111,6 @@ export class MissionCardDataSourceFactory {
       const source = this.create(config.source);
       return await source.fetchMissionCardById(id);
     } catch (error) {
-      console.error(`Error with data source (${config.source}):`, error);
       throw error;
     }
   }

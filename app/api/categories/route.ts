@@ -12,7 +12,6 @@ export async function GET(req: NextRequest) {
         revalidatePath('/api/categories');
         return NextResponse.json(categories);
     } catch(error) {
-        console.error("Error fetching categories:", error);
         return NextResponse.json({
             error: "Failed to fetch categories",
             details: error instanceof Error ? error.message : "Unknown error"

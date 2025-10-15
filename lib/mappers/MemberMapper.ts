@@ -127,7 +127,6 @@ export class MemberMapper {
         alt: memberImage.alt || 'Member profile image',
       };
     } catch (error) {
-      console.error('Error generating Sanity member image URL:', error);
       return {
         src: '/assets/img/default.jpg',
         alt: 'Default member image',

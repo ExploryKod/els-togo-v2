@@ -13,7 +13,6 @@ export async function fetchCategories(): Promise<SanityCategory[]> {
     const categories = await client.fetch(categoriesQuery);
     return categories || [];
   } catch (error) {
-    console.error('Error fetching categories from Sanity:', error);
     return [];
   }
 }

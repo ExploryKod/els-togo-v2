@@ -38,14 +38,10 @@ export interface SanityWebsiteSections {
 }
 
 export async function fetchWebsiteSections(): Promise<SanityWebsiteSections | null> {
-  console.log('🔧 fetchWebsiteSections - Starting...');
   try {
-    console.log('🔧 fetchWebsiteSections - Query:', websiteSectionsQuery);
     const sections = await client.fetch<SanityWebsiteSections>(websiteSectionsQuery);
-    console.log('🔧 fetchWebsiteSections - Raw result:', sections);
     return sections || null;
   } catch (error) {
-    console.error('Error fetching website sections from Sanity:', error);
     return null;
   }
 }

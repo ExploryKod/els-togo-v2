@@ -56,7 +56,6 @@ export async function GET() {
       },
     });
   } catch (error) {
-    console.error("Error generating Excel file:", error); // Log the error
     return NextResponse.json({ error: 'Failed to generate Excel file' });
   }
 }

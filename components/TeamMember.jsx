@@ -30,7 +30,7 @@ export default function TeamMember({ member, authors }) {
         try {
         patch(route('cooking-team.update', id), { onSuccess: () => setEditing(false) });
         } catch (error) {
-            console.log(error);
+            // Handle error silently
         }
 
     };

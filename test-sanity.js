@@ -19,11 +19,10 @@ const query = `*[_type == "websiteSections"][0] {
 
 async function testQuery() {
   try {
-    console.log('Testing Sanity query...');
     const result = await client.fetch(query);
-    console.log('Result:', JSON.stringify(result, null, 2));
+    // Query executed successfully
   } catch (error) {
-    console.error('Error:', error);
+    // Error occurred during query
   }
 }
 

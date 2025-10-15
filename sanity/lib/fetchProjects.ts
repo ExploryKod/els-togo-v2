@@ -37,7 +37,6 @@ export async function fetchProjects(): Promise<SanityProject[]> {
     const projects = await client.fetch(projectsQuery);
     return projects || [];
   } catch (error) {
-    console.error("Error fetching projects from Sanity:", error);
     return [];
   }
 }
@@ -48,7 +47,6 @@ export async function fetchProjectBySlug(slug: string): Promise<SanityProject | 
     const project = await client.fetch(query, { slug });
     return project || null;
   } catch (error) {
-    console.error("Error fetching project by slug from Sanity:", error);
     return null;
   }
 }

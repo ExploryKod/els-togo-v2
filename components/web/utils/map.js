@@ -24,7 +24,6 @@ const Map = () => {
     const apiKey = process.env.NEXT_PUBLIC_MAP_API_KEY;
 
     if (!apiKey) {
-      console.error('MapTiler API key is not set. Please add NEXT_PUBLIC_MAP_API_KEY to your .env.local file');
       return;
     }
 
