@@ -8,12 +8,18 @@ const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+    const newMenuState = !isMenuOpen;
+    setIsMenuOpen(newMenuState);
+    
     // Toggle the menu-opened class on the body
-    if (!isMenuOpen) {
+    if (newMenuState) {
       document.body.classList.add('menu-opened');
+      console.log('Menu opened - body classes:', document.body.className);
+      console.log('Menu state:', newMenuState);
     } else {
       document.body.classList.remove('menu-opened');
+      console.log('Menu closed - body classes:', document.body.className);
+      console.log('Menu state:', newMenuState);
     }
   };
 
@@ -30,9 +36,135 @@ const Header: React.FC = () => {
   }, []);
 
   return (
-    <header className="mainHeader">
-      <div className="container">
-        <div className="align-items-center g-lg-0 mainRow row">
+    <>
+      {/* Mobile Menu Overlay */}
+      {isMenuOpen && (
+        <div 
+          className="mobile-menu-overlay"
+          onClick={closeMenu}
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            zIndex: 499,
+            display: 'block'
+          }}
+        />
+      )}
+
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div 
+          className="mobile-menu"
+          style={{
+            position: 'fixed',
+            top: 'var(--header-height)',
+            right: 0,
+            bottom: 0,
+            left: 0,
+            backgroundColor: '#fff',
+            zIndex: 500,
+            padding: '20px',
+            transform: 'translateX(0)',
+            transition: 'transform 500ms cubic-bezier(0.645, 0.045, 0.355, 1)',
+            overflowY: 'auto'
+          }}
+        >
+          <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+            {/* Mobile Menu Links */}
+            <ul style={{ 
+              listStyle: 'none', 
+              padding: 0, 
+              margin: 0, 
+              flex: 1,
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '20px'
+            }}>
+              <li>
+                <Link href="/#mission" passHref onClick={closeMenu}>
+                  <span 
+                    data-hash="#mission"
+                    style={{
+                      display: 'block',
+                      padding: '15px 0',
+                      color: '#333',
+                      fontSize: '18px',
+                      textDecoration: 'none',
+                      borderBottom: '1px solid #eee'
+                    }}
+                  >
+                    Notre mission
+                  </span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/#qui-sommes-nous" passHref onClick={closeMenu}>
+                  <span 
+                    data-hash="#qui-sommes-nous"
+                    style={{
+                      display: 'block',
+                      padding: '15px 0',
+                      color: '#333',
+                      fontSize: '18px',
+                      textDecoration: 'none',
+                      borderBottom: '1px solid #eee'
+                    }}
+                  >
+                    Qui sommes-nous ?
+                  </span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/#nos-projets" passHref onClick={closeMenu}>
+                  <span 
+                    data-hash="#nos-projets"
+                    style={{
+                      display: 'block',
+                      padding: '15px 0',
+                      color: '#333',
+                      fontSize: '18px',
+                      textDecoration: 'none',
+                      borderBottom: '1px solid #eee'
+                    }}
+                  >
+                    Nos projets
+                  </span>
+                </Link>
+              </li>
+            </ul>
+
+            {/* Mobile Contact Button */}
+            <div style={{ marginTop: 'auto', paddingTop: '20px' }}>
+              <Link href="/#contact" passHref onClick={closeMenu}>
+                <span 
+                  data-hash="#contact"
+                  style={{
+                    display: 'block',
+                    padding: '15px 20px',
+                    backgroundColor: '#007bff',
+                    color: 'white',
+                    textAlign: 'center',
+                    borderRadius: '5px',
+                    textDecoration: 'none',
+                    fontSize: '16px',
+                    fontWeight: 'bold'
+                  }}
+                >
+                  Nous contacter
+                </span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
+      
+      <header className="mainHeader">
+        <div className="container">
+          <div className="align-items-center g-lg-0 mainRow row">
           {/* Logo Section */}
           <div className="col-auto logo">
             <Link href="/#homepage" passHref>
@@ -105,6 +237,7 @@ const Header: React.FC = () => {
         </div>
       </div>
     </header>
+    </>
   );
 };
 

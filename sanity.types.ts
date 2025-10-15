@@ -733,7 +733,7 @@ export type MissionCardsQueryResult = Array<{
   order: number | null;
 }>;
 // Variable: websiteSectionsQuery
-// Query: *[_type == "websiteSections"][0] {  _id,  heroSection,  projectSection,  missionSection,  teamSection,  contactSection,  contactInfo}
+// Query: *[_type == "websiteSections"] | order(_updatedAt desc)[0] {  _id,  heroSection,  projectSection,  missionSection,  teamSection,  contactSection,  contactInfo}
 export type WebsiteSectionsQueryResult = {
   _id: string;
   heroSection: {

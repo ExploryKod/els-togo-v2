@@ -83,6 +83,12 @@
       background: $white;
     }
 
+    @include media-breakpoint-up(lg) {
+      display: flex;
+      position: relative;
+      transform: none;
+    }
+
     .nav-and-cta {
       @include media-breakpoint-down(lg) {
         flex-direction: column;
@@ -106,6 +112,11 @@
 
       @include media-breakpoint-down(lg) {
         flex-direction: column;
+      }
+
+      @include media-breakpoint-up(lg) {
+        display: flex;
+        flex-direction: row;
       }
 
       li {
@@ -153,6 +164,10 @@
     display: block;
     padding: 12px 20px;
     font-size: 15px;
+
+    @include media-breakpoint-up(lg) {
+      display: inline-block;
+    }
   }
 
   .burger-menu {
