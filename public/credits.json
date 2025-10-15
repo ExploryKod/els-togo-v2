@@ -1,0 +1,27 @@
+{
+  "_id": "fallback-credits",
+  "pageTitle": "Crédits",
+  "pageDescription": "Remerciements et crédits pour les images et ressources utilisées sur ce site.",
+  "imageCredits": [
+    {
+      "imageName": "Photo d'équipe",
+      "source": "unsplash",
+      "authorName": "John Doe",
+      "authorUrl": "https://unsplash.com/@johndoe",
+      "imageUrl": "https://unsplash.com/photos/example",
+      "license": "Unsplash License",
+      "usedOn": "Page d'accueil, Section équipe"
+    }
+  ],
+  "otherCredits": [
+    {
+      "resourceName": "Icônes",
+      "authorName": "Heroicons",
+      "authorUrl": "https://heroicons.com/",
+      "resourceUrl": "https://heroicons.com/",
+      "license": "MIT License",
+      "usedOn": "Navigation, Boutons"
+    }
+  ],
+  "footerNote": "Tous les crédits sont respectés selon les licences respectives. Merci aux créateurs pour leurs contributions."
+}

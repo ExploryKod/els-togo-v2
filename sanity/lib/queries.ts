@@ -92,3 +92,12 @@ export const legalMattersQuery = groq`*[_type == "legalMatters"] | order(_update
   dataProtectionAuthority,
   legalReferences
 }`;
+
+export const creditsQuery = groq`*[_type == "credits"] | order(_updatedAt desc)[0] {
+  _id,
+  pageTitle,
+  pageDescription,
+  imageCredits,
+  otherCredits,
+  footerNote
+}`;

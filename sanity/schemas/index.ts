@@ -9,6 +9,7 @@ import elsTogoSettings from "./singletons/elsTogoSettings";
 import websiteSections from "./singletons/websiteSections";
 import legalMatters from "./singletons/legalMatters";
 import legalNotices from "./singletons/legalNotices";
+import credits from "./singletons/credits";
 
 // Export all schemas as an array
 export const elsTogoSchemas = [
@@ -23,4 +24,5 @@ export const elsTogoSchemas = [
   websiteSections,
   legalMatters,
   legalNotices,
+  credits,
 ];
