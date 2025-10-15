@@ -68,6 +68,46 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type WebsiteSections = {
+  _id: string;
+  _type: "websiteSections";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  heroSection?: {
+    pretitle?: string;
+    title?: string;
+    text?: string;
+    buttonData?: {
+      url?: string;
+      text?: string;
+    };
+  };
+  projectSection?: {
+    pretitle?: string;
+    text?: string;
+  };
+  missionSection?: {
+    pretitle?: string;
+    text?: string;
+  };
+  teamSection?: {
+    pretitle?: string;
+    title?: string;
+    text?: string;
+  };
+  contactSection?: {
+    title?: string;
+    text?: string;
+  };
+  contactInfo?: {
+    address?: string;
+    schedules?: string;
+    phone?: string;
+    email?: string;
+  };
+};
+
 export type ElsTogoSettings = {
   _id: string;
   _type: "elsTogoSettings";
@@ -124,6 +164,29 @@ export type ElsTogoSettings = {
     metadataBase?: string;
     _type: "image";
   };
+};
+
+export type MissionCard = {
+  _id: string;
+  _type: "missionCard";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  text?: string;
+  iconImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  order?: number;
 };
 
 export type CardContent = {
@@ -649,3 +712,60 @@ export type CategoriesQueryResult = Array<{
   description: string | null;
   color: string | null;
 }>;
+// Variable: missionCardsQuery
+// Query: *[_type == "missionCard"] | order(order asc, title asc) {  _id,  title,  text,  iconImage,  order}
+export type MissionCardsQueryResult = Array<{
+  _id: string;
+  title: string | null;
+  text: string | null;
+  iconImage: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  } | null;
+  order: number | null;
+}>;
+// Variable: websiteSectionsQuery
+// Query: *[_type == "websiteSections"][0] {  _id,  heroSection,  projectSection,  missionSection,  teamSection,  contactSection,  contactInfo}
+export type WebsiteSectionsQueryResult = {
+  _id: string;
+  heroSection: {
+    pretitle?: string;
+    title?: string;
+    text?: string;
+    buttonData?: {
+      url?: string;
+      text?: string;
+    };
+  } | null;
+  projectSection: {
+    pretitle?: string;
+    text?: string;
+  } | null;
+  missionSection: {
+    pretitle?: string;
+    text?: string;
+  } | null;
+  teamSection: {
+    pretitle?: string;
+    title?: string;
+    text?: string;
+  } | null;
+  contactSection: {
+    title?: string;
+    text?: string;
+  } | null;
+  contactInfo: {
+    address?: string;
+    schedules?: string;
+    phone?: string;
+    email?: string;
+  } | null;
+} | null;

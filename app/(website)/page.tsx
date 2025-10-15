@@ -5,7 +5,9 @@ import { ProjectSection } from "@/components/web/sections/project";
 import Team from "@/components/web/sections/team";
 import ElsMasonry from "@/components/web/utils/elsMasonry";
 import dynamic from "next/dynamic";
-import { PROJECTS } from "./front-project"
+import { PROJECTS } from "./front-project";
+import { MissionCardDto } from "@/lib/dto/MissionCardDto";
+import { WebsiteSectionsDto } from "@/lib/dto/WebsiteSectionsDto";
 
 async function getProjectData() {
   try {
@@ -71,6 +73,81 @@ async function getMemberData() {
   }
 }
 
+async function getMissionCardData() {
+  try {
+    const SERVER_PATH = process.env.NEXT_PUBLIC_MOD !== 'production' ? process.env.ROOT_DEV : process.env.ROOT_PATH
+    const res = await fetch(SERVER_PATH + '/api/mission-cards', {
+      // Add cache control to prevent stale data
+      cache: 'no-store',
+      // Add timeout to prevent hanging requests
+      signal: AbortSignal.timeout(10000) // 10 second timeout
+    })
+    
+    if (!res.ok) {
+      console.error('Mission cards API request failed with status:', res.status, res.statusText);
+      // Return empty array instead of throwing
+      return [];
+    }
+    
+    const data = await res.json();
+    
+    // Check if the response contains an error
+    if (data.error) {
+      console.error('Mission cards API returned error:', data.error, data.details);
+      return []; // Return empty array
+    }
+    
+    return data;
+  } catch (error) {
+    console.error('Error fetching mission cards data:', error);
+    // Return empty array instead of throwing
+    return [];
+  }
+}
+
+async function getWebsiteSectionsData() {
+  console.log('🔧 getWebsiteSectionsData - Starting...');
+  try {
+    const SERVER_PATH = process.env.NEXT_PUBLIC_MOD !== 'production' ? process.env.ROOT_DEV : process.env.ROOT_PATH
+    console.log('🔧 getWebsiteSectionsData - SERVER_PATH:', SERVER_PATH);
+    const url = SERVER_PATH + '/api/website-sections?t=' + Date.now();
+    console.log('🔧 getWebsiteSectionsData - URL:', url);
+    
+    const res = await fetch(url, {
+      // Add cache control to prevent stale data
+      cache: 'no-store',
+      // Add timeout to prevent hanging requests
+      signal: AbortSignal.timeout(10000) // 10 second timeout
+    })
+    
+    console.log('🔧 getWebsiteSectionsData - Response status:', res.status);
+    
+    if (!res.ok) {
+      console.error('Website sections API request failed with status:', res.status, res.statusText);
+      // Return fallback data instead of throwing
+      const { WebsiteSectionsMapper } = await import("@/lib/mappers/WebsiteSectionsMapper");
+      return WebsiteSectionsMapper.createFallback();
+    }
+    
+    const data = await res.json();
+    console.log('🔧 getWebsiteSectionsData - Response data:', data);
+    
+    // Check if the response contains an error
+    if (data.error) {
+      console.error('Website sections API returned error:', data.error, data.details);
+      const { WebsiteSectionsMapper } = await import("@/lib/mappers/WebsiteSectionsMapper");
+      return WebsiteSectionsMapper.createFallback();
+    }
+    
+    return data;
+  } catch (error) {
+    console.error('Error fetching website sections data:', error);
+    // Return fallback data instead of throwing
+    const { WebsiteSectionsMapper } = await import("@/lib/mappers/WebsiteSectionsMapper");
+    return WebsiteSectionsMapper.createFallback();
+  }
+}
+
 
 export default async function Page() {
 
@@ -87,83 +164,36 @@ const DATA = [
 
 const projects:any = await getProjectData() || PROJECTS;
 const members:any = await getMemberData() || [];
+const missionCards: MissionCardDto[] = await getMissionCardData() || [];
+const websiteSections: WebsiteSectionsDto = await getWebsiteSectionsData();
   // const file = await fs.readFile(process.cwd() + '/public/front-projects.json', 'utf8');
   // const projects = JSON.parse(file);
   // console.log(process.cwd());
   
-console.log(projects);
-
-
+  // Use dynamic sections data from Sanity/API
   const sections = {
-    intro: [
-      {
-        pretitle: 'Association ELS - Togo',
-        title: 'Nous promouvons l\'éduction, les loisirs et la santé',
-        text: 'Nous pensons que chacun a le droit d\'être éduqué, soigné et protégé.Nous apportons notre pierre pour que chacun puisse vivre dans un environnement sain.',
-        buttonData: {
-          url: '#contact',
-          text: 'S\'engager avec nous',
-        },
-      },
-    ],
-    project: [
-      {
-        pretitle: 'Nos projets',
-        text: 'Découvrez nos projets communautaires axés sur l\'autonomisation, l\'éducation et l\'environnement.'
-      }
-    ],
-    mission: [
-      {
-        pretitle: 'Notre Mission & nos valeurs',
-        text: 'Nous pensons que chacun a le droit d\'être éduqué, soigné et protégé.',
-      },
-    ],
-    members: [
-      {
-        pretitle: 'Notre équipe',
-        title: 'Une équipe engagée pour rendre le monde meilleur',
-        text: 'Voici notre équipe dynamique et engagée qui travaille chaque jour pour faire une différence dans le monde.',
-      },
-    ],
-    contact: [
-      {
-        title: 'Nous contacter',
-        text: `Si vous voulez vous engager avec nous, nous serons très heureux de vous accueillir:
-        contactez-nous par email ou téléphone.`,
-      },
-    ]
+    intro: websiteSections.heroSection,
+    project: websiteSections.projectSection,
+    mission: websiteSections.missionSection,
+    members: websiteSections.teamSection,
+    contact: websiteSections.contactSection,
   };
 
-  const contacts = [
-    {
-      address: '123 Rue de Exemple, Lomé, Togo',
-      schedules: 'Lundi - Vendredi: 8h - 17h',
-      phone: '(+228) 90 00 00 00',
-      email: 'contact@example.com',
-    },
-  ];
+  const contacts = websiteSections.contactInfo;
 
+  console.log('🔧 Page - websiteSections:', websiteSections);
+  console.log('🔧 Page - sections:', sections);
+  console.log('🔧 Page - contacts:', contacts);
+  
+  // More detailed debugging
+  console.log('🔧 Page - heroSection:', websiteSections.heroSection);
+  console.log('🔧 Page - missionSection:', websiteSections.missionSection);
+  console.log('🔧 Page - sections.intro:', sections.intro);
+  console.log('🔧 Page - sections.mission:', sections.mission);
+
+  // Legacy cards data - now using Sanity data instead
   const cards = {
-    mission: [
-      {
-        imgSource: '/assets/img/icons/5236.jpg',
-        imgAltText: 'Personnes tenant des feuilles',
-        title: 'Dignité',
-        text: 'Nous respectons chaque personne et groupe que nous aidons.',
-      },
-      {
-        imgSource: '/assets/img/icons/5236.jpg',
-        imgAltText: 'Mains assemblant un puzzle',
-        title: 'Amour',
-        text: 'Nos engagements se font grâce à la formidable force que nous donne l\'amour.',
-      },
-      {
-        imgSource: '/assets/img/icons/5236.jpg',
-        imgAltText: 'Mains assemblant un puzzle',
-        title: 'Franchise',
-        text: 'Nous valorisons l\'authenticité et l\'intégrité.',
-      },
-    ],
+    mission: [],
   };
 
 
@@ -171,7 +201,7 @@ console.log(projects);
   return (
     <>
     <Hero sections={sections} />
-    {cards && cards.mission.length > 0 ? (<Mission sections={sections} cards={cards} />) : null}
+    <Mission sections={sections} cards={cards} missionCards={missionCards} />
     {projects && projects.length > 0 ? (
          <ProjectSection sections={sections}>
           <ElsMasonry projects={projects} />

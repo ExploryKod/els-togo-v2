@@ -59,3 +59,21 @@ export const categoriesQuery = groq`*[_type == "category"] | order(title asc) {
   description,
   color
 }`;
+
+export const missionCardsQuery = groq`*[_type == "missionCard"] | order(order asc, title asc) {
+  _id,
+  title,
+  text,
+  iconImage,
+  order
+}`;
+
+export const websiteSectionsQuery = groq`*[_type == "websiteSections"] | order(_updatedAt desc)[0] {
+  _id,
+  heroSection,
+  projectSection,
+  missionSection,
+  teamSection,
+  contactSection,
+  contactInfo
+}`;

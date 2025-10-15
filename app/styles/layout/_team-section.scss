@@ -18,7 +18,94 @@
         flex-wrap: wrap;
     }
 
+    // Team card recto/verso effect with fondu transition
+    .team-card {
+        position: relative;
+        min-height: 320px;
+        min-width: 280px;
+        max-width: 320px;
+        width: 100%;
+        overflow: hidden;
+        
+        // Responsive width adjustments
+        @include media-breakpoint-down(sm) {
+            min-width: 260px;
+            max-width: 100%;
+        }
+        
+        @include media-breakpoint-up(lg) {
+            min-width: 300px;
+            max-width: 350px;
+        }
+        
+        .team-card-recto {
+            opacity: 1;
+            filter: blur(0px);
+            transform: translateY(0px) scale(1);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 2;
+        }
+        
+        .team-card-verso {
+            opacity: 0;
+            filter: blur(8px);
+            transform: translateY(20px) scale(0.95);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 1;
+        }
+        
+        &:hover {
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: rgba(60, 64, 67, 0.2) 0px 20px 40px 0px, rgba(60, 64, 67, 0.1) 0px 8px 16px 0px;
+            background: linear-gradient(135deg, rgba(248, 250, 252, 1) 0%, rgba(241, 245, 249, 0.95) 50%, rgba(226, 232, 240, 0.9) 100%);
+            
+            .team-card-recto {
+                opacity: 0;
+                filter: blur(4px);
+                transform: translateY(-10px) scale(0.98);
+            }
+            
+            .team-card-verso {
+                opacity: 1;
+                filter: blur(0px);
+                transform: translateY(0px) scale(1);
+            }
+        }
+        
+        // Smooth entrance animation
+        animation: cardEntrance 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        
+        // Staggered animation delay
+        &:nth-child(1) { animation-delay: 0.1s; }
+        &:nth-child(2) { animation-delay: 0.2s; }
+        &:nth-child(3) { animation-delay: 0.3s; }
+        &:nth-child(4) { animation-delay: 0.4s; }
+        &:nth-child(5) { animation-delay: 0.5s; }
+        &:nth-child(6) { animation-delay: 0.6s; }
+        &:nth-child(7) { animation-delay: 0.7s; }
+        &:nth-child(8) { animation-delay: 0.8s; }
+    }
+    
+    // Card entrance animation with fondu effect
+    @keyframes cardEntrance {
+        0% {
+            opacity: 0;
+            filter: blur(10px);
+            transform: translateY(40px) scale(0.9);
+        }
+        50% {
+            opacity: 0.7;
+            filter: blur(5px);
+            transform: translateY(20px) scale(0.95);
+        }
+        100% {
+            opacity: 1;
+            filter: blur(0px);
+            transform: translateY(0) scale(1);
+        }
+    }
 
+    // Legacy box styles (keeping for compatibility)
     .box {
         position: relative;
         width: 350px;
@@ -50,7 +137,6 @@
             }
         }
     }
-
 
     .top-bar{
         width: 50%;

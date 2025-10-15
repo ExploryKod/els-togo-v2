@@ -24,9 +24,13 @@ export default defineConfig({
   },
   plugins: [
     structureTool({ 
-      structure: pageStructure(elsTogoSchemas.filter(schema => schema.name === 'elsTogoSettings')) 
+      structure: pageStructure(elsTogoSchemas.filter(schema => 
+        schema.name === 'elsTogoSettings' || schema.name === 'websiteSections'
+      )) 
     }),
-    singletonPlugin(elsTogoSchemas.filter(schema => schema.name === 'elsTogoSettings').map(schema => schema.name)),
+    singletonPlugin(elsTogoSchemas.filter(schema => 
+      schema.name === 'elsTogoSettings' || schema.name === 'websiteSections'
+    ).map(schema => schema.name)),
     unsplashImageAsset(),
     assistWithPresets(),
     process.env.NODE_ENV === "development" &&

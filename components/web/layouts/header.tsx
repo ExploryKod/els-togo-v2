@@ -1,8 +1,34 @@
-import React from 'react';
+'use client';
+
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link'; // For client-side routing in Next.js
 import Image from 'next/image';
 
 const Header: React.FC = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+    // Toggle the menu-opened class on the body
+    if (!isMenuOpen) {
+      document.body.classList.add('menu-opened');
+    } else {
+      document.body.classList.remove('menu-opened');
+    }
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+    document.body.classList.remove('menu-opened');
+  };
+
+  // Cleanup effect
+  useEffect(() => {
+    return () => {
+      document.body.classList.remove('menu-opened');
+    };
+  }, []);
+
   return (
     <header className="mainHeader">
       <div className="container">
@@ -28,17 +54,17 @@ const Header: React.FC = () => {
               <div className="col-auto me-lg-3">
                 <ul className="header-menu">
                   <li className="menu__nav-item">
-                    <Link href="/#mission" passHref>
+                    <Link href="/#mission" passHref onClick={closeMenu}>
                       <span data-hash="#mission">Notre mission</span>
                     </Link>
                   </li>
                   <li className="menu__nav-item">
-                    <Link href="/#qui-sommes-nous" passHref>
+                    <Link href="/#qui-sommes-nous" passHref onClick={closeMenu}>
                       <span data-hash="#qui-sommes-nous">Qui sommes-nous ?</span>
                     </Link>
                   </li>
                   <li className="menu__nav-item">
-                    <Link href="/#nos-projets" passHref>
+                    <Link href="/#nos-projets" passHref onClick={closeMenu}>
                       <span data-hash="#nos-projets">Nos projets</span>
                     </Link>
                   </li>
@@ -47,7 +73,7 @@ const Header: React.FC = () => {
 
               {/* Contact Button */}
               <div className="col-auto ms-lg-5">
-                <Link href="/#contact" passHref>
+                <Link href="/#contact" passHref onClick={closeMenu}>
                   <span data-hash="#contact" className="button button--secondary">
                     Nous contacter
                   </span>
@@ -58,7 +84,11 @@ const Header: React.FC = () => {
 
           {/* Burger Menu Button for Mobile */}
           <div className="burger-menu col-auto">
-            <button className="burger-menu__button" aria-label="Menu">
+            <button 
+              className="burger-menu__button" 
+              aria-label="Menu"
+              onClick={toggleMenu}
+            >
               <svg viewBox="0 0 100 100">
                 <path
                   className="line line1"
