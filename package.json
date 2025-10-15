@@ -3,7 +3,7 @@
   "scripts": {
     "predev": "pnpm run typegen",
     "dev": "next",
-    "prebuild": "pnpm run typegen",
+    "prebuild": "if [ \"$VERCEL_ENV\" = \"production\" ] && [ \"$SKIP_TYPEGEN\" = \"true\" ]; then echo 'Skipping typegen in production build'; else pnpm run typegen; fi",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -11,6 +11,8 @@
     "setup": "pnpm dlx sanity@latest init --env .env.local",
     "postsetup": "echo 'create the read token by following the rest of the guide: https://github.com/vercel/next.js/tree/canary/examples/cms-sanity#creating-a-read-token'",
     "typegen": "sanity schema extract && sanity typegen generate",
+    "build:with-typegen": "RUN_TYPEGEN=true pnpm run build",
+    "build:fast": "pnpm run build",
     "sanity:studio": "sanity dev",
     "sanity:build": "sanity build",
     "sanity:deploy": "sanity deploy"
