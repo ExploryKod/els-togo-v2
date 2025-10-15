@@ -4,6 +4,8 @@ import Mission from "@/components/web/sections/mission";
 import { ProjectSection } from "@/components/web/sections/project";
 import Team from "@/components/web/sections/team";
 import ElsMasonry from "@/components/web/utils/elsMasonry";
+import { ConditionalMap } from "@/components/conditional/ConditionalMap";
+import { ConditionalExternalImages } from "@/components/conditional/ConditionalExternalImages";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { PROJECTS } from "./front-project";
@@ -134,9 +136,6 @@ async function getWebsiteSectionsData() {
 
 export default async function Page() {
 
-const Map = dynamic(() => import('@/components/web/utils/map'), {
-  ssr: false,
-});
 
 const DATA = [
   { image: 'https://picsum.photos/seed/random101/500/500' },
@@ -176,7 +175,7 @@ const websiteSections: WebsiteSectionsDto = await getWebsiteSectionsData();
     <Hero sections={sections} />
     <Mission sections={sections} cards={cards} missionCards={missionCards} />
     {projects && projects.length > 0 ? (
-         <ProjectSection sections={sections}>
+         <ProjectSection sections={sections} className="projects-section--centered">
           <ElsMasonry projects={projects.slice(0, 6)} />
           <div className="text-center mt-8">
             <Link 
@@ -191,7 +190,7 @@ const websiteSections: WebsiteSectionsDto = await getWebsiteSectionsData();
     {members && members.length > 0 ? (<Team sections={sections} members={members} />) : null}
     {contacts && contacts.length > 0 ? (
       <Contact contacts={contacts} sections={sections}>   
-        <Map />
+        <ConditionalMap />
         </Contact>
     ) : null}
     </>

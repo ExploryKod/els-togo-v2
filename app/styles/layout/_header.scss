@@ -63,6 +63,40 @@
       width: auto;
       height: 100%;
     }
+    
+    .logo-responsive {
+      // Responsive logo sizing
+      @include media-breakpoint-down(sm) {
+        height: 40px !important; // ~57% of 70px header height
+        width: 40px !important;
+      }
+      
+      @include media-breakpoint-up(sm) {
+        @include media-breakpoint-down(md) {
+          height: 45px !important; // ~64% of 70px header height
+          width: 45px !important;
+        }
+      }
+      
+      @include media-breakpoint-up(md) {
+        @include media-breakpoint-down(lg) {
+          height: 50px !important; // ~71% of 70px header height
+          width: 50px !important;
+        }
+      }
+      
+      @include media-breakpoint-up(lg) {
+        @include media-breakpoint-down(xl) {
+          height: 60px !important; // ~67% of 90px header height
+          width: 60px !important;
+        }
+      }
+      
+      @include media-breakpoint-up(xl) {
+        height: 70px !important; // ~64% of 110px header height
+        width: 70px !important;
+      }
+    }
   }
 
   .nav {

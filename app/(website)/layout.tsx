@@ -1,14 +1,13 @@
 import "../globals.css";
 import "../globals.scss";
 import ConditionalClerkProvider from '@/components/ConditionalClerkProvider'
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import { VisualEditing } from 'next-sanity'
 import type { Metadata } from "next";
 import Head from "next/head";
 import {
   toPlainText,
 } from "next-sanity";
-import { Inter } from "next/font/google";
+import { ConditionalGoogleFonts } from "@/components/conditional/ConditionalGoogleFonts";
 import { Suspense } from "react";
 
 import type { SettingsQueryResult } from "@/sanity.types";
@@ -17,6 +16,8 @@ import { sanityFetch } from "@/sanity/lib/fetch";
 import { settingsQuery } from "@/sanity/lib/queries";
 import { resolveOpenGraphImage } from "@/sanity/lib/utils";
 import Header from "@/components/web/layouts/header";
+import { CookieBanner } from "@/components/cookies/CookieBanner";
+import { ConditionalAnalytics } from "@/components/analytics/ConditionalAnalytics";
 
 export async function generateMetadata(): Promise<Metadata> {
   const data = await sanityFetch<SettingsQueryResult>({
@@ -49,11 +50,6 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
-});
 
 async function Footer() {
   const data = await sanityFetch<SettingsQueryResult>({
@@ -90,7 +86,7 @@ export default function RootLayout({
 }) {
   return (
     <ConditionalClerkProvider>
-    <html lang="fr" className={`${inter.variable} bg-white text-black scroll-smooth with-scss boostrap-active`} suppressHydrationWarning >
+    <html lang="fr" className="bg-white text-black scroll-smooth with-scss boostrap-active" suppressHydrationWarning >
       <Head>
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -101,6 +97,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#ffffff" />
       </Head>
       <body>
+        <ConditionalGoogleFonts>
           <Suspense>
             <Header />
           </Suspense>
@@ -108,8 +105,10 @@ export default function RootLayout({
           <Suspense>
             <Footer />
           </Suspense>
-        <SpeedInsights />
-        <VisualEditing />
+          <ConditionalAnalytics />
+          <VisualEditing />
+          <CookieBanner />
+        </ConditionalGoogleFonts>
       </body>
     </html>
     </ConditionalClerkProvider>

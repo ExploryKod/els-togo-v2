@@ -36,7 +36,7 @@ export default async function ProjectsPage() {
       };
 
   return (
-    <ProjectSection sections={sections}>
+    <ProjectSection sections={sections} className="projects-list my-5">
       <Suspense fallback={<div className="text-center py-8">Chargement des projets...</div>}>
         <ProjectsList initialProjects={projects} />
       </Suspense>

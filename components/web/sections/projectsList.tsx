@@ -19,6 +19,8 @@ export default function ProjectsList({ initialProjects }: ProjectsListProps) {
   const observerRef = useRef<HTMLDivElement>(null);
   const [query, setQuery] = useState('');
   const [activeCategories, setActiveCategories] = useState<string[]>([]);
+  const [showEndMessage, setShowEndMessage] = useState(false);
+  const [hasShownEndMessage, setHasShownEndMessage] = useState(false);
 
   // Derive available categories from current project list (initially from SSR data)
   const availableCategories = useMemo(() => {
@@ -66,6 +68,14 @@ export default function ProjectsList({ initialProjects }: ProjectsListProps) {
       (entries) => {
         if (entries[0].isIntersecting && hasMore && !loading) {
           loadMoreProjects();
+        } else if (entries[0].isIntersecting && !hasMore && projects.length > 0 && !hasShownEndMessage) {
+          // Afficher le message quand on arrive en fin de page (une seule fois)
+          setShowEndMessage(true);
+          setHasShownEndMessage(true);
+          // Le faire disparaître après 3 secondes
+          setTimeout(() => {
+            setShowEndMessage(false);
+          }, 3000);
         }
       },
       { threshold: 0.1 }
@@ -76,13 +86,14 @@ export default function ProjectsList({ initialProjects }: ProjectsListProps) {
     }
 
     return () => observer.disconnect();
-  }, [loadMoreProjects, hasMore, loading]);
+  }, [loadMoreProjects, hasMore, loading, projects.length]);
 
   // When filters change (query or categories), reset list and fetch first page with filters
   useEffect(() => {
     let cancelled = false;
     async function fetchFirstPage() {
       setLoading(true);
+      setHasShownEndMessage(false); // Reset le flag quand les filtres changent
       try {
         const params = new URLSearchParams({ page: '1', limit: String(PROJECTS_PER_PAGE) });
         if (query.trim()) params.set('q', query.trim());
@@ -155,10 +166,17 @@ export default function ProjectsList({ initialProjects }: ProjectsListProps) {
       {/* Intersection observer target */}
       <div ref={observerRef} className="h-4" />
       
-      {/* End of projects message */}
-      {!hasMore && projects.length > 0 && (
-        <div className="text-center py-8 text-gray-500">
-          Tous les projets ont été chargés
+      {/* End of projects message with transition */}
+      {showEndMessage && (
+        <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50">
+          <div className="bg-primary text-white px-6 py-3 rounded-full shadow-lg animate-fade-in-out">
+            <div className="flex items-center gap-2">
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              <span className="text-sm font-medium">Tous les projets ont été chargés</span>
+            </div>
+          </div>
         </div>
       )}
     </div>

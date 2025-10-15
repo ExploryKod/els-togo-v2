@@ -4,7 +4,102 @@
   }
 }
 
+// Style commun pour toutes les sections projets
 .projects-section {
+  background-color: $gray-50;
+  padding: 60px 0;
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+  
+  .pre-title {
+    margin-bottom: 20px;
+    font-size: 30px;
+    color: $black;
+  }
+  
+  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: $black;
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+  
+  p {
+    font-size: 1rem;
+    color: $gray-600;
+    margin-bottom: 30px;
+    line-height: 1.6;
+  }
+}
+
+// Variant pour la page d'accueil (centré)
+.projects-section--centered {
+  .pre-title {
+    text-align: center !important;
+    
+    &::after {
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+    }
+  }
+  
+  h1 {
+    text-align: center !important;
+  }
+  
+  p {
+    text-align: center !important;
+  }
+}
+
+// Variant pour la page projets (style indépendant)
+.projects-list {
+  background-color: $white;
+  padding: 80px 0;
+  min-height: 100vh;
+  
+  .container {
+    max-width: 1400px;
+    padding: 0 20px;
+  }
+  
+  .pre-title {
+    text-align: left !important;
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: $primary;
+    
+    &::after {
+      left: 0 !important;
+      transform: none !important;
+      width: 60px;
+      height: 3px;
+      background-color: $primary;
+    }
+  }
+  
+  h1 {
+    text-align: left !important;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: $black;
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+  
+  p {
+    text-align: left !important;
+    font-size: 1.1rem;
+    color: $gray-600;
+    margin-bottom: 40px;
+    line-height: 1.6;
+  }
+}
   .projects-section-inner {
     position: relative;
     column-gap: 3rem;
@@ -174,4 +269,3 @@
     }
   }
 
-}

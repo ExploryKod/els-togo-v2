@@ -68,6 +68,82 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type Credits = {
+  _id: string;
+  _type: "credits";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  pageTitle?: string;
+  pageDescription?: string;
+  imageCredits?: Array<{
+    imageName?: string;
+    source?: "unsplash" | "pexels" | "pixabay" | "freepik" | "other";
+    authorName?: string;
+    authorUrl?: string;
+    imageUrl?: string;
+    license?: string;
+    usedOn?: string;
+    _type: "imageCredit";
+    _key: string;
+  }>;
+  otherCredits?: Array<{
+    resourceName?: string;
+    authorName?: string;
+    authorUrl?: string;
+    resourceUrl?: string;
+    license?: string;
+    usedOn?: string;
+    _type: "otherCredit";
+    _key: string;
+  }>;
+  footerNote?: string;
+};
+
+export type LegalNotices = {
+  _id: string;
+  _type: "legalNotices";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  siteInfo?: {
+    siteUrl?: string;
+    siteDescription?: string;
+  };
+  organizationInfo?: {
+    organizationName?: string;
+    legalForm?: string;
+    capital?: string;
+    registrationNumber?: string;
+    registrationOffice?: string;
+    address?: {
+      street?: string;
+      city?: string;
+      country?: string;
+    };
+    contactPhone?: string;
+  };
+  publicationDirector?: {
+    name?: string;
+    position?: string;
+  };
+  hostingInfo?: {
+    providerName?: string;
+    providerAddress?: {
+      street?: string;
+      city?: string;
+      country?: string;
+    };
+    providerPhone?: string;
+    providerWebsite?: string;
+  };
+  disclaimers?: {
+    contentDisclaimer?: string;
+    copyrightNotice?: string;
+    liabilityDisclaimer?: string;
+  };
+};
+
 export type LegalMatters = {
   _id: string;
   _type: "legalMatters";
@@ -490,15 +566,11 @@ export type SanityAssistSchemaTypeField = {
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./sanity/lib/queries.ts
 // Variable: settingsQuery
-// Query: *[_type == "elsTogoSettings"][0]
+// Query: *[_type == "elsTogoSettings"][0] {  _id,  title,  description,  footer,  ogImage {    asset->{      _id,      url,      metadata {        dimensions {          width,          height        }      }    },    alt,    metadataBase  }}
 export type SettingsQueryResult = {
   _id: string;
-  _type: "elsTogoSettings";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  description?: Array<{
+  title: string | null;
+  description: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -515,8 +587,8 @@ export type SettingsQueryResult = {
     level?: number;
     _type: "block";
     _key: string;
-  }>;
-  footer?: Array<{
+  }> | null;
+  footer: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -533,20 +605,21 @@ export type SettingsQueryResult = {
     level?: number;
     _type: "block";
     _key: string;
-  }>;
-  ogImage?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    metadataBase?: string;
-    _type: "image";
-  };
+  }> | null;
+  ogImage: {
+    asset: {
+      _id: string;
+      url: string | null;
+      metadata: {
+        dimensions: {
+          width: number | null;
+          height: number | null;
+        } | null;
+      } | null;
+    } | null;
+    alt: string | null;
+    metadataBase: string | null;
+  } | null;
 } | null;
 // Variable: projectsQuery
 // Query: *[_type == "project"] | order(_createdAt desc) {  _id,  id,  title,  accroche,  description,  goal,  howWeDo,  results,  date,  place,  category->{    _id,    title,    description,    color  },  projectImg,  "slug": slug.current}
@@ -707,4 +780,33 @@ export type LegalMattersQueryResult = {
     rgpdReference?: string;
     togoleseLawReference?: string;
   } | null;
+} | null;
+// Variable: creditsQuery
+// Query: *[_type == "credits"] | order(_updatedAt desc)[0] {  _id,  pageTitle,  pageDescription,  imageCredits,  otherCredits,  footerNote}
+export type CreditsQueryResult = {
+  _id: string;
+  pageTitle: string | null;
+  pageDescription: string | null;
+  imageCredits: Array<{
+    imageName?: string;
+    source?: "freepik" | "other" | "pexels" | "pixabay" | "unsplash";
+    authorName?: string;
+    authorUrl?: string;
+    imageUrl?: string;
+    license?: string;
+    usedOn?: string;
+    _type: "imageCredit";
+    _key: string;
+  }> | null;
+  otherCredits: Array<{
+    resourceName?: string;
+    authorName?: string;
+    authorUrl?: string;
+    resourceUrl?: string;
+    license?: string;
+    usedOn?: string;
+    _type: "otherCredit";
+    _key: string;
+  }> | null;
+  footerNote: string | null;
 } | null;
