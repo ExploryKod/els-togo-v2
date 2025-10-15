@@ -27,31 +27,31 @@
 // 3. Base stuff
 
 .with-scss { 
-@import 'base/base';
-@import 'base/fonts';
-@import 'base/typography';
-@import 'base/helpers';
+    @import 'base/base';
+    @import 'base/fonts';
+    @import 'base/typography';
+    @import 'base/helpers';
 
-// 4. Layout-related sections
-@import 'layout/header';
-@import 'layout/footer';
-@import 'layout/layout-main';
-@import 'layout/section-hero';
-@import 'layout/mission-section';
-@import 'layout/team-section';
-@import 'layout/our-projects';
-@import 'layout/section-contact';
+    // 4. Layout-related sections
+    @import 'layout/header';
+    @import 'layout/footer';
+    @import 'layout/layout-main';
+    @import 'layout/section-hero';
+    @import 'layout/mission-section';
+    @import 'layout/team-section';
+    @import 'layout/our-projects';
+    @import 'layout/section-contact';
 
-// 5. Components
-@import 'components/button';
-@import 'components/image-text';
-@import 'components/text-cards-horizon';
-@import 'components/modal';
-@import 'components/box-cards';
+    // 5. Components
+    @import 'components/button';
+    @import 'components/image-text';
+    @import 'components/text-cards-horizon';
+    @import 'components/modal';
+    @import 'components/box-cards';
+}
 @import 'components/three-col-block';
 @import 'components/items-rows';
 @import 'components/list-boxes';
 
 // 6. Page-specific styles
 @import 'pages/project';
-}

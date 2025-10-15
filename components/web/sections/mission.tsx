@@ -62,9 +62,9 @@ const Mission: React.FC<MissionProps> = ({ sections, cards, missionCards }) => {
                     <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-primary rounded-b-lg"></div>
                     
                     {/* Card content */}
-                    <div className="p-6 flex flex-col items-center text-center h-full">
+                    <div className="p-6 flex flex-col items-center text-center h-full justify-between">
                       {/* Icon/Image */}
-                      <div className="relative mb-4">
+                      <div className="relative mb-4 flex-shrink-0">
                         <div className="w-20 h-20 rounded-full overflow-hidden ring-4 ring-gray-100 group-hover:ring-primary transition-all duration-500 ease-out group-hover:shadow-lg bg-white p-2">
                           <Image
                             src={displayCard.iconImage.src}
@@ -108,9 +108,9 @@ const Mission: React.FC<MissionProps> = ({ sections, cards, missionCards }) => {
                   <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-primary rounded-b-lg"></div>
                   
                   {/* Card content */}
-                  <div className="p-6 flex flex-col items-center text-center h-full">
+                  <div className="p-6 flex flex-col items-center text-center h-full justify-between">
                     {/* Icon/Image */}
-                    <div className="relative mb-4">
+                    <div className="relative mb-4 flex-shrink-0">
                       <div className="w-20 h-20 rounded-full overflow-hidden ring-4 ring-gray-100 group-hover:ring-primary transition-all duration-500 ease-out group-hover:shadow-lg bg-white p-2">
                         <Image
                           src={card.imgSource || '/assets/img/icons/5236.jpg'}
@@ -151,8 +151,8 @@ const Mission: React.FC<MissionProps> = ({ sections, cards, missionCards }) => {
                   }}
                 >
                   <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-primary rounded-b-lg"></div>
-                  <div className="p-6 flex flex-col items-center text-center h-full">
-                    <div className="relative mb-4">
+                  <div className="p-6 flex flex-col items-center text-center h-full justify-between">
+                    <div className="relative mb-4 flex-shrink-0">
                       <div className="w-20 h-20 rounded-full overflow-hidden ring-4 ring-gray-100 group-hover:ring-primary transition-all duration-500 ease-out group-hover:shadow-lg bg-white p-2">
                         <Image src="/assets/img/icons/5236.jpg" alt="personnes tenant des feuilles" width={64} height={64} priority />
                       </div>
@@ -176,8 +176,8 @@ const Mission: React.FC<MissionProps> = ({ sections, cards, missionCards }) => {
                   }}
                 >
                   <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-primary rounded-b-lg"></div>
-                  <div className="p-6 flex flex-col items-center text-center h-full">
-                    <div className="relative mb-4">
+                  <div className="p-6 flex flex-col items-center text-center h-full justify-between">
+                    <div className="relative mb-4 flex-shrink-0">
                       <div className="w-20 h-20 rounded-full overflow-hidden ring-4 ring-gray-100 group-hover:ring-primary transition-all duration-500 ease-out group-hover:shadow-lg bg-white p-2">
                         <Image src="/assets/img/icons/5236.jpg" alt="mains assemblant un puzzle" width={64} height={64} />
                       </div>
@@ -201,8 +201,8 @@ const Mission: React.FC<MissionProps> = ({ sections, cards, missionCards }) => {
                   }}
                 >
                   <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-primary rounded-b-lg"></div>
-                  <div className="p-6 flex flex-col items-center text-center h-full">
-                    <div className="relative mb-4">
+                  <div className="p-6 flex flex-col items-center text-center h-full justify-between">
+                    <div className="relative mb-4 flex-shrink-0">
                       <div className="w-20 h-20 rounded-full overflow-hidden ring-4 ring-gray-100 group-hover:ring-primary transition-all duration-500 ease-out group-hover:shadow-lg bg-white p-2">
                         <Image src="/assets/img/icons/5236.jpg" alt="mains assemblant un puzzle" width={64} height={64} />
                       </div>
@@ -226,8 +226,8 @@ const Mission: React.FC<MissionProps> = ({ sections, cards, missionCards }) => {
                   }}
                 >
                   <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-primary rounded-b-lg"></div>
-                  <div className="p-6 flex flex-col items-center text-center h-full">
-                    <div className="relative mb-4">
+                  <div className="p-6 flex flex-col items-center text-center h-full justify-between">
+                    <div className="relative mb-4 flex-shrink-0">
                       <div className="w-20 h-20 rounded-full overflow-hidden ring-4 ring-gray-100 group-hover:ring-primary transition-all duration-500 ease-out group-hover:shadow-lg bg-white p-2">
                         <Image src="/assets/img/icons/5236.jpg" alt="mains assemblant un puzzle" width={64} height={64} />
                       </div>
