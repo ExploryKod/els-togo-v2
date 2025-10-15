@@ -10,9 +10,17 @@ export interface DataSourceConfig {
 }
 
 export function getDataSourceConfig(): DataSourceConfig {
-  const source = (process.env.NEXT_PUBLIC_DATA_SOURCE as DataSource) || 'sanity';
-
-  // Data source configuration loaded
+  // In production, if Sanity env vars are missing, default to JSON
+  const isProduction = process.env.NODE_ENV === 'production' || process.env.VERCEL_ENV === 'production';
+  const hasSanityConfig = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID && 
+    (process.env.NEXT_PUBLIC_ELS_TOGO_SANITY_DATASET || process.env.NEXT_PUBLIC_SANITY_DATASET);
+  
+  let source = (process.env.NEXT_PUBLIC_DATA_SOURCE as DataSource) || 'sanity';
+  
+  // If in production and no Sanity config, use JSON
+  if (isProduction && !hasSanityConfig && source === 'sanity') {
+    source = 'json';
+  }
 
   return {
     source,

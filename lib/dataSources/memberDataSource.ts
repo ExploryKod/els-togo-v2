@@ -57,19 +57,35 @@ class SupabaseMemberDataSource implements MemberDataSource {
 class JsonMemberDataSource implements MemberDataSource {
   async fetchMembers(): Promise<Member[]> {
     try {
-      const SERVER_PATH = process.env.NEXT_PUBLIC_MOD !== 'production' ? process.env.ROOT_DEV : process.env.ROOT_PATH;
+      // Try multiple URL strategies for better production compatibility
+      const urls = [
+        // Production URL
+        process.env.ROOT_PATH ? `${process.env.ROOT_PATH}/members.json` : null,
+        // Development URL
+        process.env.ROOT_DEV ? `${process.env.ROOT_DEV}/members.json` : null,
+        // Relative URL (works in most cases)
+        '/members.json',
+        // Absolute URL with current origin
+        typeof window !== 'undefined' ? `${window.location.origin}/members.json` : null,
+      ].filter(Boolean);
       
-      const response = await fetch(`${SERVER_PATH}/members.json`);
-      
-      if (!response.ok) {
-        return [];
+      for (const url of urls) {
+        try {
+          const response = await fetch(url as string);
+          
+          if (response.ok) {
+            const members = await response.json();
+            if (members && members.length > 0) {
+              return members.map(MemberMapper.fromJson);
+            }
+          }
+        } catch (urlError) {
+          // Try next URL
+          continue;
+        }
       }
       
-      const members = await response.json();
-      if (!members || members.length === 0) {
-        return [];
-      }
-      return members.map(MemberMapper.fromJson);
+      return [];
     } catch (error) {
       return [];
     }
@@ -106,8 +122,34 @@ export class MemberDataSourceFactory {
       const source = this.create(config.source);
       const members = await source.fetchMembers();
       
-      return members;
+      // If we got members from the primary source, return them
+      if (members && members.length > 0) {
+        return members;
+      }
+      
+      // If primary source returned empty, try JSON fallback
+      if (config.source !== 'json') {
+        const jsonSource = new JsonMemberDataSource();
+        const jsonMembers = await jsonSource.fetchMembers();
+        if (jsonMembers && jsonMembers.length > 0) {
+          return jsonMembers;
+        }
+      }
+      
+      return members || [];
     } catch (error) {
+      // If primary source fails, try JSON fallback
+      if (config.source !== 'json') {
+        try {
+          const jsonSource = new JsonMemberDataSource();
+          const jsonMembers = await jsonSource.fetchMembers();
+          if (jsonMembers && jsonMembers.length > 0) {
+            return jsonMembers;
+          }
+        } catch (jsonError) {
+          // Both sources failed
+        }
+      }
       return [];
     }
   }
