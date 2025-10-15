@@ -21,11 +21,13 @@
     // Team card recto/verso effect with fondu transition
     .team-card {
         position: relative;
-        min-height: 320px;
+        min-height: 400px; // Increased minimum height for consistency
         min-width: 280px;
         max-width: 320px;
         width: 100%;
         overflow: hidden;
+        display: flex;
+        flex-direction: column;
         
         // Responsive width adjustments
         @include media-breakpoint-down(sm) {
@@ -44,6 +46,9 @@
             transform: translateY(0px) scale(1);
             transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             z-index: 2;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
         }
         
         .team-card-verso {
@@ -52,6 +57,9 @@
             transform: translateY(20px) scale(0.95);
             transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             z-index: 1;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
         }
         
         &:hover {

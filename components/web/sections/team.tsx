@@ -36,26 +36,26 @@ const Team: React.FC<TeamProps> = ({ sections, members }) => {
           </div>
 
           <div className="col-12">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-items-center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-items-center items-stretch">
               {members.length > 0 &&
                 members.map((member, index) => {
                   const teamMember = MemberMapper.toTeamMember(member);
                   return (
                     <div 
                       key={index} 
-                      className="team-card group relative bg-white rounded-xl transition-all duration-500 overflow-hidden group-hover:scale-105"
+                      className="team-card group relative bg-white rounded-xl transition-all duration-500 overflow-hidden group-hover:scale-105 h-full flex flex-col"
                       style={{
                         boxShadow: 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px',
                         background: 'linear-gradient(135deg, rgba(248, 250, 252, 0.95) 0%, rgba(241, 245, 249, 0.85) 50%, rgba(226, 232, 240, 0.75) 100%)'
                       }}
                     >
                       {/* RECTO - Front Side */}
-                      <div className="team-card-recto absolute inset-0 w-full h-full transition-opacity duration-500 group-hover:opacity-0">
+                      <div className="team-card-recto absolute inset-0 w-full h-full transition-opacity duration-500 group-hover:opacity-0 flex flex-col">
                         {/* Top accent bar */}
                         <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-primary rounded-b-lg"></div>
                         
                         {/* Card content */}
-                        <div className="p-6 flex flex-col items-center text-center h-full">
+                        <div className="p-6 flex flex-col items-center text-center h-full flex-grow">
                           {/* Profile image */}
                           <div className="relative mb-4">
                             <div className="w-24 h-24 rounded-full overflow-hidden ring-4 ring-gray-100 group-hover:ring-primary transition-all duration-500 ease-out group-hover:shadow-lg">
@@ -73,7 +73,7 @@ const Team: React.FC<TeamProps> = ({ sections, members }) => {
                           </div>
                           
                           {/* Member info */}
-                          <div className="space-y-2 flex-grow flex flex-col justify-center">
+                          <div className="space-y-2 flex-grow flex flex-col justify-between">
                             <h3 className="text-lg font-semibold text-gray-900 group-hover:text-primary transition-colors duration-500 ease-out">
                               {teamMember.displayName}
                             </h3>
@@ -146,12 +146,12 @@ const Team: React.FC<TeamProps> = ({ sections, members }) => {
                       </div>
                       
                       {/* VERSO - Back Side */}
-                      <div className="team-card-verso absolute inset-0 w-full h-full opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                      <div className="team-card-verso absolute inset-0 w-full h-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col">
                         {/* Top accent bar */}
                         <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-primary rounded-b-lg"></div>
                         
                         {/* Description content */}
-                        <div className="p-6 flex flex-col items-center justify-center text-center h-full">
+                        <div className="p-6 flex flex-col items-center justify-center text-center h-full flex-grow">
                           <div className="space-y-4">
                             <h3 className="text-lg font-semibold text-gray-900 group-hover:text-primary transition-colors duration-500 ease-out">
                               {teamMember.displayName}
