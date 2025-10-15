@@ -4,8 +4,8 @@
 
 import { assist } from "@sanity/assist";
 
-// Import project schema from shared studio
-import project from "../../../studio/schemas/els-togo/project";
+// Import project schema from local schemas
+import project from "../schemas/documents/project";
 
 export const assistWithPresets = () =>
   assist({
@@ -16,7 +16,7 @@ export const assistWithPresets = () =>
             /**
              * Creates project description from the project title and category
              */
-            path: "projectDescription",
+            path: "description",
             instructions: [
               {
                 _key: "preset-instruction-1",
@@ -34,7 +34,7 @@ export const assistWithPresets = () =>
                         _key: "6b5d5d6a63cf0",
                       },
                       {
-                        path: "projectTitle",
+                        path: "title",
                         _type: "sanity.assist.instruction.fieldRef",
                         _key: "0132742d463b",
                       },
@@ -47,7 +47,7 @@ export const assistWithPresets = () =>
                       {
                         _type: "sanity.assist.instruction.fieldRef",
                         _key: "f208ef240062",
-                        path: "projectCategory",
+                        path: "category",
                       },
                       {
                         text: ", generate a comprehensive project description for an association project. The description should be structured, informative, and tailored to the project category. Include project objectives, methodology, expected outcomes, and community impact.",
@@ -67,7 +67,7 @@ export const assistWithPresets = () =>
             /**
              * Summarize content into the project extract field
              */
-            path: "projectExtract",
+            path: "accroche",
             instructions: [
               {
                 _key: "preset-instruction-2",
@@ -84,7 +84,7 @@ export const assistWithPresets = () =>
                         text: "Create a short project summary based on ",
                       },
                       {
-                        path: "projectDescription",
+                        path: "description",
                         _type: "sanity.assist.instruction.fieldRef",
                         _key: "c62d14c73496",
                       },
