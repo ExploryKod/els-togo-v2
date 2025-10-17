@@ -28,12 +28,7 @@ const Map = () => {
       .replace(/\s+/g, '') // remove any whitespace
       .replace(/[^A-Za-z0-9]/g, ''); // keep only safe chars
 
-    // Debug: Log the key (remove this after debugging)
-    console.log('MapTiler API Key Debug:', {
-      rawKey: rawKey ? `${rawKey.substring(0, 10)}...` : 'undefined',
-      apiKey: apiKey ? `${apiKey.substring(0, 10)}...` : 'undefined',
-      keyLength: apiKey ? apiKey.length : 0
-    });
+    // Debug logging removed for production
 
     if (!apiKey) {
       // Fallback to OSM when key is missing/invalid
